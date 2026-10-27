@@ -32,5 +32,5 @@ console.log({ todo2 });
 console.log({ project1 });
 project1.removeTodo(todo1.id);
 
-console.log('Hello world!');
-console.log('Hi!');
+const found = project1.findTodo(todo2.id);
+console.log({ found });
