@@ -10,4 +10,7 @@ export class Todo {
     this.id = crypto.randomUUID();
     this.completed = false;
   }
+  toggleComplete() {
+    this.completed = !this.completed;
+  }
 }
