@@ -18,6 +18,10 @@ const todo2 = new Todo(
   'Leg day',
 );
 
+const project1 = new Project('New work');
+project1.addTodo(todo1);
+project1.addTodo(todo2);
+
 todo1.toggleComplete();
 console.log(todo1.completed);
 todo1.toggleComplete();
@@ -25,6 +29,7 @@ console.log(todo1.completed);
 
 console.log({ todo1 });
 console.log({ todo2 });
+console.log({ project1 });
 
 console.log('Hello world!');
 console.log('Hi!');

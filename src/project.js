@@ -5,4 +5,7 @@ export class Project {
     this.id = crypto.randomUUID();
     this.todos = [];
   }
+  addTodo(todo) {
+    this.todos.push(todo);
+  }
 }
