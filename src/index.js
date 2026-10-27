@@ -17,6 +17,11 @@ const todo2 = new Todo(
   'Leg day',
 );
 
+todo1.toggleComplete();
+console.log(todo1.completed);
+todo1.toggleComplete();
+console.log(todo1.completed);
+
 console.log({ todo1 });
 console.log({ todo2 });
 
