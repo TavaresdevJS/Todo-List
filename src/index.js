@@ -1,5 +1,6 @@
 // index.js
 import { Todo } from './todo.js';
+import { Project } from './project.js';
 
 const todo1 = new Todo(
   'buy milk',
