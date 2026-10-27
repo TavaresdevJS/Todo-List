@@ -30,6 +30,7 @@ console.log(todo1.completed);
 console.log({ todo1 });
 console.log({ todo2 });
 console.log({ project1 });
+project1.removeTodo(todo1.id);
 
 console.log('Hello world!');
 console.log('Hi!');
