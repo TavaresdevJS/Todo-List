@@ -1,1 +1,2 @@
 // projectManager.js
+const projects = [];
