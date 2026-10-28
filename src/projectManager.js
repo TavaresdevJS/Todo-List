@@ -1,7 +1,7 @@
 // projectManager.js
 import { Project } from './project.js';
 
-const projects = [];
+let projects = [];
 
 //Add project function
 export function addProject(name) {
@@ -20,4 +20,15 @@ const inbox = addProject('Inbox');
 
 export function defaultProject() {
   return inbox;
+}
+
+//Delete project
+export function deleteProject(id) {
+  if (id === inbox.id) return;
+  projects = projects.filter(project => project.id !== id);
+}
+
+//Find project
+export function findProject(id) {
+  return projects.find(project => project.id === id);
 }
