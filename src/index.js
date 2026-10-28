@@ -1,7 +1,18 @@
 // index.js
 import { Todo } from './todo.js';
 import { Project } from './project.js';
-import { addProject, getProjects } from './projectManager.js';
+import {
+  addProject,
+  getProjects,
+  deleteProject,
+  findProject,
+  defaultProject,
+} from './projectManager.js';
+
+const groceries = addProject('Groceries');
+const gym = addProject('Gym');
+
+const todoDefault = new Todo('Inbox', '.', '.', '.', '.');
 
 const todo1 = new Todo(
   'buy milk',
@@ -19,25 +30,24 @@ const todo2 = new Todo(
   'Leg day',
 );
 
-const project1 = new Project('New work');
-project1.addTodo(todo1);
-project1.addTodo(todo2);
+const inbox = defaultProject();
+
+inbox.addTodo(todoDefault);
+groceries.addTodo(todo1);
+gym.addTodo(todo2);
+
+console.log({ inbox });
+console.log({ groceries });
+console.log({ gym });
 
 todo1.toggleComplete();
 console.log(todo1.completed);
-todo1.toggleComplete();
-console.log(todo1.completed);
+console.log(todo2.completed);
 
-console.log({ todo1 });
-console.log({ todo2 });
-console.log({ project1 });
-project1.removeTodo(todo1.id);
-
-const found = project1.findTodo(todo2.id);
-console.log({ found });
-
-const work = addProject('Work');
-const gym = addProject('Gym');
-
-console.log({ work });
+groceries.removeTodo(todo1.id);
+deleteProject(gym.id);
 console.log(getProjects());
+deleteProject(inbox.id);
+console.log(getProjects());
+console.log(findProject(groceries.id));
+console.log(inbox.findTodo(todoDefault.id));
