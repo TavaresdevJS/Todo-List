@@ -1,6 +1,7 @@
 // index.js
 import { Todo } from './todo.js';
 import { Project } from './project.js';
+import { addProject, getProjects } from './projectManager.js';
 
 const todo1 = new Todo(
   'buy milk',
@@ -34,3 +35,9 @@ project1.removeTodo(todo1.id);
 
 const found = project1.findTodo(todo2.id);
 console.log({ found });
+
+const work = addProject('Work');
+const gym = addProject('Gym');
+
+console.log({ work });
+console.log(getProjects());
