@@ -9,3 +9,8 @@ export function addProject(name) {
   projects.push(newProject);
   return newProject;
 }
+
+//Read project function
+export function getProjects() {
+  return projects;
+}
