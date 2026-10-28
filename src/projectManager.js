@@ -14,3 +14,10 @@ export function addProject(name) {
 export function getProjects() {
   return projects;
 }
+
+//Default project function
+const inbox = addProject('Inbox');
+
+export function defaultProject() {
+  return inbox;
+}
