@@ -8,6 +8,7 @@ import {
   findProject,
   defaultProject,
 } from './projectManager.js';
+import { saveProjects, loadProjects } from './storage.js';
 
 const groceries = addProject('Groceries');
 const gym = addProject('Gym');
@@ -51,3 +52,8 @@ deleteProject(inbox.id);
 console.log(getProjects());
 console.log(findProject(groceries.id));
 console.log(inbox.findTodo(todoDefault.id));
+
+saveProjects();
+
+const loaded = loadProjects();
+console.log(loaded);
