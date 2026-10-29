@@ -55,5 +55,28 @@ console.log(inbox.findTodo(todoDefault.id));
 
 saveProjects();
 
-const loaded = loadProjects();
-console.log(loaded);
+console.log(loadProjects());
+
+/* const loaded = loadProjects(); */
+/* loaded[0].addTodo(todo2);
+console.log(loaded); */
+
+/* const plain = loaded[0];
+const rebuilt = new Project(plain.name);
+rebuilt.id = plain.id;
+rebuilt.todos = plain.todos;
+const plainTodo = plain.todos[0];
+const rebuiltTodo = new Todo(
+  plainTodo.title,
+  plainTodo.description,
+  plainTodo.dueDate,
+  plainTodo.priority,
+  plainTodo.notes,
+);
+rebuiltTodo.id = plainTodo.id;
+console.log({ plainTodo });
+console.log({ rebuiltTodo }); */
+/* rebuilt.todos[0].toggleComplete(); */
+/* console.log({ plain });
+console.log({ rebuilt });
+ */
