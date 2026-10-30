@@ -1,10 +1,8 @@
 // storage.js
-import { getProjects } from './projectManager.js';
 import { Todo } from './todo.js';
 import { Project } from './project.js';
 
-export function saveProjects() {
-  const projects = getProjects();
+export function saveProjects(projects) {
   const text = JSON.stringify(projects);
   localStorage.setItem('projects', text);
 }

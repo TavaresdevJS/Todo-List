@@ -1,7 +1,8 @@
 // projectManager.js
 import { Project } from './project.js';
+import { loadProjects } from './storage.js';
 
-let projects = [];
+let projects = loadProjects();
 
 //Add project function
 export function addProject(name) {
@@ -16,8 +17,15 @@ export function getProjects() {
 }
 
 //Default project function
-const inbox = addProject('Inbox');
+let inbox;
 
+if (projects.length === 0) {
+  // first visit: nothing was saved, so create the Inbox
+  inbox = addProject('Inbox');
+} else {
+  // returning visit: the saved Inbox is already in the array
+  inbox = projects[0];
+}
 export function defaultProject() {
   return inbox;
 }

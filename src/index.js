@@ -53,7 +53,7 @@ console.log(getProjects());
 console.log(findProject(groceries.id));
 console.log(inbox.findTodo(todoDefault.id));
 
-saveProjects();
+saveProjects(getProjects());
 
 console.log(loadProjects());
 
