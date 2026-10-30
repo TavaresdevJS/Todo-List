@@ -8,7 +8,12 @@ export function saveProjects(projects) {
 }
 
 export function loadProjects() {
-  const data = JSON.parse(localStorage.getItem('projects')) || [];
+  let data;
+  try {
+    data = JSON.parse(localStorage.getItem('projects')) || [];
+  } catch {
+    data = [];
+  }
   return data.map(projectData => {
     const rebuilt = new Project(projectData.name);
     rebuilt.id = projectData.id;
