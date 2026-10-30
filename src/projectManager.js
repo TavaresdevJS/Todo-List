@@ -42,3 +42,8 @@ export function deleteProject(id) {
 export function findProject(id) {
   return projects.find(project => project.id === id);
 }
+
+//Save everything
+export function saveAll() {
+  saveProjects(projects);
+}
