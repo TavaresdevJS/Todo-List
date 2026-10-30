@@ -1,6 +1,6 @@
 // projectManager.js
 import { Project } from './project.js';
-import { loadProjects } from './storage.js';
+import { loadProjects, saveProjects } from './storage.js';
 
 let projects = loadProjects();
 
@@ -8,6 +8,7 @@ let projects = loadProjects();
 export function addProject(name) {
   const newProject = new Project(name);
   projects.push(newProject);
+  saveProjects(projects); // save the change before returning
   return newProject;
 }
 
@@ -34,6 +35,7 @@ export function defaultProject() {
 export function deleteProject(id) {
   if (id === inbox.id) return;
   projects = projects.filter(project => project.id !== id);
+  saveProjects(projects); // save the change
 }
 
 //Find project
