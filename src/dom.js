@@ -26,7 +26,7 @@ export function renderTodo(project) {
 
     todoItem.classList.add('todo-item');
 
-    todoItem.textContent = todo.title;
+    todoItem.textContent = `${todo.title} ${todo.dueDate}`;
     todoList.appendChild(todoItem);
   });
 }
