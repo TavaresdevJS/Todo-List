@@ -9,6 +9,5 @@ import {
 import { renderProject } from './dom.js';
 
 console.log(getProjects());
-addProject('Groceries');
-addProject('Gym');
+
 renderProject();
