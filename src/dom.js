@@ -11,6 +11,9 @@ const projectList = document.getElementById('project-list');
 const todoList = document.getElementById('todo-list');
 const viewTitle = document.getElementById('view-title');
 const inboxBtn = document.querySelector('[data-view="inbox"]');
+const addProjectBtn = document.getElementById('add-project');
+const projectForm = document.getElementById('project-form');
+const closeFormBtn = document.getElementById('close-project-btn');
 
 export function renderProject() {
   projectList.innerHTML = '';
@@ -57,3 +60,11 @@ projectList.addEventListener('click', e => {
 inboxBtn.addEventListener('click', () => {
   showProject(defaultProject());
 });
+
+function hiddenToggle() {
+  projectForm.classList.toggle('hidden');
+}
+
+addProjectBtn.addEventListener('click', hiddenToggle);
+
+closeFormBtn.addEventListener('click', hiddenToggle);
