@@ -9,6 +9,7 @@ import {
 
 const projectList = document.getElementById('project-list');
 const todoList = document.getElementById('todo-list');
+const viewTitle = document.getElementById('view-title');
 
 export function renderProject() {
   projectList.innerHTML = '';
@@ -45,4 +46,5 @@ projectList.addEventListener('click', e => {
   const projectId = li.dataset.id;
   const projectFound = findProject(projectId);
   renderTodo(projectFound);
+  viewTitle.textContent = projectFound.name;
 });
