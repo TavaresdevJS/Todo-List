@@ -14,6 +14,8 @@ export function renderProject() {
     projectItem.classList.add('project-item');
 
     projectItem.textContent = project.name;
+    projectItem.dataset.id = project.id;
+
     projectList.appendChild(projectItem);
   });
 }
@@ -30,3 +32,11 @@ export function renderTodo(project) {
     todoList.appendChild(todoItem);
   });
 }
+
+projectList.addEventListener('click', e => {
+  const li = e.target.closest('li');
+
+  if (!li) return; // Guard clause if click was not inside an <li>
+  const projectId = li.dataset.id;
+  console.log(`The project Id is: ${projectId}`);
+});
