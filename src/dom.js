@@ -10,6 +10,7 @@ import {
 const projectList = document.getElementById('project-list');
 const todoList = document.getElementById('todo-list');
 const viewTitle = document.getElementById('view-title');
+const inboxBtn = document.querySelector('[data-view="inbox"]');
 
 export function renderProject() {
   projectList.innerHTML = '';
@@ -39,12 +40,20 @@ export function renderTodo(project) {
   });
 }
 
+export function showProject(project) {
+  renderTodo(project);
+  viewTitle.textContent = project.name;
+}
+
 projectList.addEventListener('click', e => {
   const li = e.target.closest('li');
 
   if (!li) return; // Guard clause if click was not inside an <li>
   const projectId = li.dataset.id;
   const projectFound = findProject(projectId);
-  renderTodo(projectFound);
-  viewTitle.textContent = projectFound.name;
+  showProject(projectFound);
+});
+
+inboxBtn.addEventListener('click', () => {
+  showProject(defaultProject());
 });

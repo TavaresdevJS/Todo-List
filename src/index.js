@@ -7,7 +7,7 @@ import {
   defaultProject,
   saveAll,
 } from './projectManager.js';
-import { renderProject, renderTodo } from './dom.js';
+import { renderProject, renderTodo, showProject } from './dom.js';
 
 console.log(getProjects());
 
@@ -23,4 +23,4 @@ gym.addTodo(
 saveAll(); */
 
 renderProject();
-renderTodo(defaultProject());
+showProject(defaultProject());
