@@ -1,6 +1,11 @@
 // dom.js
 import { Project } from './project.js';
-import { addProject, getProjects, defaultProject } from './projectManager.js';
+import {
+  addProject,
+  getProjects,
+  defaultProject,
+  findProject,
+} from './projectManager.js';
 
 const projectList = document.getElementById('project-list');
 const todoList = document.getElementById('todo-list');
@@ -38,5 +43,6 @@ projectList.addEventListener('click', e => {
 
   if (!li) return; // Guard clause if click was not inside an <li>
   const projectId = li.dataset.id;
-  console.log(`The project Id is: ${projectId}`);
+  const projectFound = findProject(projectId);
+  console.log({ projectFound });
 });
