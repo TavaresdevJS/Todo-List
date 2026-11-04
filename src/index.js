@@ -10,6 +10,6 @@ import {
 import { renderProject, renderTodo } from './dom.js';
 
 console.log(getProjects());
-addProject('Groceries');
+
 renderProject();
 renderTodo(defaultProject());
