@@ -44,5 +44,5 @@ projectList.addEventListener('click', e => {
   if (!li) return; // Guard clause if click was not inside an <li>
   const projectId = li.dataset.id;
   const projectFound = findProject(projectId);
-  console.log({ projectFound });
+  renderTodo(projectFound);
 });
