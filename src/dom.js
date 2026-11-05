@@ -73,14 +73,14 @@ closeFormBtn.addEventListener('click', hiddenToggle);
 
 projectForm.addEventListener('submit', e => {
   e.preventDefault();
+  const name = projectNameInput.value.trim();
 
-  if (!projectNameInput.value.trim()) {
+  if (!name.trim()) {
     alert('Please provide a title');
     return;
-  } else {
-    addProject(projectNameInput.value);
-    renderProject();
-    hiddenToggle();
-    projectNameInput.value = '';
   }
+  addProject(name);
+  renderProject();
+  hiddenToggle();
+  projectNameInput.value = '';
 });
