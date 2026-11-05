@@ -21,6 +21,7 @@ const closeFormBtn = document.getElementById('close-project-btn');
 const viewTitle = document.getElementById('view-title');
 const todoList = document.getElementById('todo-list');
 const addTaskBtn = document.getElementById('add-task');
+const todoForm = document.getElementById('todo-form');
 
 export function renderProject() {
   projectList.innerHTML = '';
@@ -72,6 +73,10 @@ function hiddenToggle() {
   projectForm.classList.toggle('hidden');
 }
 
+function todoToggle() {
+  todoForm.classList.toggle('hidden');
+}
+
 addProjectBtn.addEventListener('click', hiddenToggle);
 
 closeFormBtn.addEventListener('click', hiddenToggle);
@@ -89,3 +94,5 @@ projectForm.addEventListener('submit', e => {
   hiddenToggle();
   projectNameInput.value = '';
 });
+
+addTaskBtn.addEventListener('click', todoToggle);
