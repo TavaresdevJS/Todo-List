@@ -7,15 +7,20 @@ import {
   findProject,
 } from './projectManager.js';
 
-const projectList = document.getElementById('project-list');
-const todoList = document.getElementById('todo-list');
-const viewTitle = document.getElementById('view-title');
+// Sidebar
 const inboxBtn = document.querySelector('[data-view="inbox"]');
+const projectList = document.getElementById('project-list');
 const addProjectBtn = document.getElementById('add-project');
+
+// Project form
 const projectForm = document.getElementById('project-form');
-const closeFormBtn = document.getElementById('close-project-btn');
-const submitBtn = document.getElementById('submit-project-btn');
 const projectNameInput = document.getElementById('name-input');
+const closeFormBtn = document.getElementById('close-project-btn');
+
+// Main area
+const viewTitle = document.getElementById('view-title');
+const todoList = document.getElementById('todo-list');
+const addTaskBtn = document.getElementById('add-task');
 
 export function renderProject() {
   projectList.innerHTML = '';
