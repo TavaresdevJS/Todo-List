@@ -57,6 +57,50 @@
         <h1 id="view-title">My tasks</h1>
         <ul id="todo-list"></ul>
         <button type="button" id="add-task">Add Task</button>
+        <form id="todo-form" class="todo-form hidden">
+          <div class="todo-form-header">
+            <button
+              id="close-todo-btn"
+              class="close-todo-btn"
+              aria-label="close"
+              type="button"
+            >
+              X
+            </button>
+          </div>
+          <div class="todo-form-body">
+            <label class="todo-form-label" for="todo-name-input">Title</label>
+            <input
+              required
+              type="text"
+              class="form-control"
+              id="todo-name-input"
+              value=""
+            />
+            <label class="todo-form-label" for="todo-date-input">Date</label>
+            <input
+              required
+              type="date"
+              class="form-control"
+              id="todo-date-input"
+              value=""
+            />
+            <label class="todo-form-label" for="todo-description-input"
+              >Description</label
+            >
+            <textarea
+              class="todo-description"
+              id="todo-description-input"
+              cols="30"
+              rows="5"
+            ></textarea>
+          </div>
+          <div class="todo-form-footer">
+            <button id="add-todo-btn" class="btn" type="submit">
+              Add task
+            </button>
+          </div>
+        </form>
       </div>
     </main>
     <footer class="footer"></footer>
