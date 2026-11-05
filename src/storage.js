@@ -23,7 +23,6 @@ export function loadProjects() {
         todoData.description,
         todoData.dueDate,
         todoData.priority,
-        todoData.notes,
       );
       todo.id = todoData.id;
       todo.completed = todoData.completed;

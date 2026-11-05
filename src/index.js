@@ -13,11 +13,11 @@ console.log(getProjects());
 
 //testing
 /* const groceries = addProject('Groceries');
-groceries.addTodo(new Todo('Buy eggs', '', '2026-11-06', 'medium', ''));
+groceries.addTodo(new Todo('Buy eggs', '', '2026-11-06', 'medium'));
 
 const gym = addProject('Gym');
 gym.addTodo(
-  new Todo('Leg day', 'Squats and deadlifts', '2026-11-05', 'high', ''),
+  new Todo('Leg day', 'Squats and deadlifts', '2026-11-05', 'high')
 );
 
 saveAll(); */
