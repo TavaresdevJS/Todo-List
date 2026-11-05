@@ -1,4 +1,5 @@
 // dom.js
+import { el } from 'date-fns/locale';
 import { Project } from './project.js';
 import {
   addProject,
@@ -15,6 +16,7 @@ const addProjectBtn = document.getElementById('add-project');
 const projectForm = document.getElementById('project-form');
 const closeFormBtn = document.getElementById('close-project-btn');
 const submitBtn = document.getElementById('submit-project-btn');
+const projectNameInput = document.getElementById('name-input');
 
 export function renderProject() {
   projectList.innerHTML = '';
@@ -70,6 +72,12 @@ addProjectBtn.addEventListener('click', hiddenToggle);
 
 closeFormBtn.addEventListener('click', hiddenToggle);
 
-submitBtn.addEventListener('submit', e => {
+projectForm.addEventListener('submit', e => {
   e.preventDefault();
+
+  if (projectNameInput == '') {
+    alert('No project name!');
+  } else {
+    console.log(`${projectNameInput.value} has been submited`);
+  }
 });
