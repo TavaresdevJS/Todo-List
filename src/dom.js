@@ -14,6 +14,7 @@ const inboxBtn = document.querySelector('[data-view="inbox"]');
 const addProjectBtn = document.getElementById('add-project');
 const projectForm = document.getElementById('project-form');
 const closeFormBtn = document.getElementById('close-project-btn');
+const submitBtn = document.getElementById('submit-project-btn');
 
 export function renderProject() {
   projectList.innerHTML = '';
@@ -68,3 +69,7 @@ function hiddenToggle() {
 addProjectBtn.addEventListener('click', hiddenToggle);
 
 closeFormBtn.addEventListener('click', hiddenToggle);
+
+submitBtn.addEventListener('submit', e => {
+  e.preventDefault();
+});
