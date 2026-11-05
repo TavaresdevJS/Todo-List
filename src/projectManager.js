@@ -4,11 +4,16 @@ import { loadProjects, saveProjects } from './storage.js';
 
 let projects = loadProjects();
 
+//Save everything
+export function saveAll() {
+  saveProjects(projects);
+}
+
 //Add project function
 export function addProject(name) {
   const newProject = new Project(name);
   projects.push(newProject);
-  saveProjects(projects); // save the change before returning
+  saveAll(); // save the change before returning
   return newProject;
 }
 
@@ -35,15 +40,10 @@ export function defaultProject() {
 export function deleteProject(id) {
   if (id === inbox.id) return;
   projects = projects.filter(project => project.id !== id);
-  saveProjects(projects); // save the change
+  saveAll(); // save the change
 }
 
 //Find project
 export function findProject(id) {
   return projects.find(project => project.id === id);
-}
-
-//Save everything
-export function saveAll() {
-  saveProjects(projects);
 }

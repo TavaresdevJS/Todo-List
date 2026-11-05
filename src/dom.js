@@ -1,5 +1,4 @@
 // dom.js
-import { el } from 'date-fns/locale';
 import { Project } from './project.js';
 import {
   addProject,
@@ -75,9 +74,13 @@ closeFormBtn.addEventListener('click', hiddenToggle);
 projectForm.addEventListener('submit', e => {
   e.preventDefault();
 
-  if (projectNameInput == '') {
-    alert('No project name!');
+  if (!projectNameInput.value.trim()) {
+    alert('Please provide a title');
+    return;
   } else {
-    console.log(`${projectNameInput.value} has been submited`);
+    addProject(projectNameInput.value);
+    renderProject();
+    hiddenToggle();
+    projectNameInput.value = '';
   }
 });
