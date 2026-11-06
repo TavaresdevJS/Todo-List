@@ -23,6 +23,10 @@ const todoList = document.getElementById('todo-list');
 const addTaskBtn = document.getElementById('add-task');
 const todoForm = document.getElementById('todo-form');
 const closeTodoBtn = document.getElementById('close-todo-btn');
+const todoNameInput = document.getElementById('todo-name-input');
+const todoDate = document.getElementById('todo-date-input');
+const todoPriority = document.getElementById('todo-priority');
+const todoDescription = document.getElementById('todo-description-input');
 
 let currentProject;
 
@@ -101,4 +105,24 @@ projectForm.addEventListener('submit', e => {
   renderProject();
   hiddenToggle();
   projectNameInput.value = '';
+});
+
+todoForm.addEventListener('submit', e => {
+  e.preventDefault();
+  const name = todoNameInput.value.trim();
+
+  if (!name.trim()) {
+    alert('Please provide a task name');
+    return;
+  }
+  const todo = new Todo(
+    name,
+    todoDate.value,
+    todoPriority.value,
+    todoDescription.value,
+  );
+  currentProject.addTodo(todo);
+  renderTodo();
+  todoToggle();
+  todoNameInput.value = '';
 });
