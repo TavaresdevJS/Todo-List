@@ -52,11 +52,17 @@ export function renderTodo(project) {
 
   project.todos.forEach(todo => {
     const todoItem = document.createElement('li');
+    const todoDeleteBtn = document.createElement('button');
 
     todoItem.classList.add('todo-item');
+    todoDeleteBtn.classList.add('todo-delete-btn');
+    todoItem.dataset.id = todo.id;
 
     todoItem.textContent = `${todo.title} ${todo.dueDate}`;
+    todoDeleteBtn.textContent = 'X';
+
     todoList.appendChild(todoItem);
+    todoItem.appendChild(todoDeleteBtn);
   });
 }
 
