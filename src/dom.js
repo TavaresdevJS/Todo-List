@@ -24,6 +24,8 @@ const addTaskBtn = document.getElementById('add-task');
 const todoForm = document.getElementById('todo-form');
 const closeTodoBtn = document.getElementById('close-todo-btn');
 
+let currentProject;
+
 export function renderProject() {
   projectList.innerHTML = '';
   getProjects().forEach(project => {
@@ -53,6 +55,7 @@ export function renderTodo(project) {
 }
 
 export function showProject(project) {
+  currentProject = project;
   renderTodo(project);
   viewTitle.textContent = project.name;
 }
