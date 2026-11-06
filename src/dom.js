@@ -63,6 +63,10 @@ export function renderTodo(project) {
 
     todoList.appendChild(todoItem);
     todoItem.appendChild(todoDeleteBtn);
+
+    todoDeleteBtn.addEventListener('click', () => {
+      todoItem.removeTodo(todoItem.id);
+    });
   });
 }
 
