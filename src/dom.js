@@ -1,10 +1,12 @@
 // dom.js
 import { Project } from './project.js';
+import { Todo } from './todo.js';
 import {
   addProject,
   getProjects,
   defaultProject,
   findProject,
+  saveAll,
 } from './projectManager.js';
 
 // Sidebar
@@ -117,12 +119,13 @@ todoForm.addEventListener('submit', e => {
   }
   const todo = new Todo(
     name,
+    todoDescription.value,
     todoDate.value,
     todoPriority.value,
-    todoDescription.value,
   );
   currentProject.addTodo(todo);
-  renderTodo();
+  saveAll();
+  renderTodo(currentProject);
   todoToggle();
-  todoNameInput.value = '';
+  todoForm.reset();
 });
