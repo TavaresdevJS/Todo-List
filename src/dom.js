@@ -65,6 +65,11 @@ export function renderTodo(project) {
     checkBox.type = 'checkbox';
     checkBox.classList.add('todo-check');
 
+    checkBox.addEventListener('change', () => {
+      saveAll();
+      renderTodo(project);
+    });
+
     todoText.textContent = `${todo.title} ${todo.dueDate}`;
     todoDeleteBtn.textContent = 'X';
 
