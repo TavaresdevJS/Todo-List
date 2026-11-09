@@ -54,6 +54,7 @@ export function renderTodo(project) {
     const todoItem = document.createElement('li');
     todoItem.classList.add('todo-item');
     todoItem.dataset.id = todo.id;
+    if (todo.completed === true) todoItem.classList.toggle('checked');
 
     const todoText = document.createElement('span');
     todoText.classList.add('todo-text');
