@@ -55,6 +55,9 @@ export function renderTodo(project) {
     todoItem.classList.add('todo-item');
     todoItem.dataset.id = todo.id;
 
+    const todoText = document.createElement('span');
+    todoText.classList.add('todo-text');
+
     const todoDeleteBtn = document.createElement('button');
     todoDeleteBtn.classList.add('todo-delete-btn');
 
@@ -62,12 +65,13 @@ export function renderTodo(project) {
     checkBox.type = 'checkbox';
     checkBox.classList.add('todo-check');
 
-    todoItem.textContent = `${todo.title} ${todo.dueDate}`;
+    todoText.textContent = `${todo.title} ${todo.dueDate}`;
     todoDeleteBtn.textContent = 'X';
 
-    todoList.appendChild(todoItem);
-    todoItem.appendChild(todoDeleteBtn);
     todoItem.appendChild(checkBox);
+    todoList.appendChild(todoItem);
+    todoItem.appendChild(todoText);
+    todoItem.appendChild(todoDeleteBtn);
 
     todoDeleteBtn.addEventListener('click', () => {
       project.removeTodo(todo.id); // Deletes todo
