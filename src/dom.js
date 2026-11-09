@@ -63,9 +63,11 @@ export function renderTodo(project) {
 
     const checkBox = document.createElement('input');
     checkBox.type = 'checkbox';
+    checkBox.checked = todo.completed;
     checkBox.classList.add('todo-check');
 
     checkBox.addEventListener('change', () => {
+      todo.toggleComplete();
       saveAll();
       renderTodo(project);
     });
