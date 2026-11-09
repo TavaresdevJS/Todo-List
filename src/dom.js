@@ -7,6 +7,7 @@ import {
   defaultProject,
   findProject,
   saveAll,
+  deleteProject,
 } from './projectManager.js';
 
 // Sidebar
@@ -53,8 +54,10 @@ export function renderProject() {
     projectItem.appendChild(projectText);
     projectItem.appendChild(projectDeleteBtn);
 
-    projectDeleteBtn.addEventListener('click', () => {
-      project.deleteProject(project.id);
+    projectDeleteBtn.addEventListener('click', e => {
+      e.stopPropagation();
+      deleteProject(project.id);
+      renderProject(project);
     });
   });
 }
