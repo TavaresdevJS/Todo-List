@@ -57,7 +57,7 @@ export function renderProject() {
     projectDeleteBtn.addEventListener('click', e => {
       e.stopPropagation();
       deleteProject(project.id);
-      renderProject(project);
+      renderProject();
     });
   });
 }
