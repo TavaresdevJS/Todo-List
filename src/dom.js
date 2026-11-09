@@ -65,7 +65,9 @@ export function renderTodo(project) {
     todoItem.appendChild(todoDeleteBtn);
 
     todoDeleteBtn.addEventListener('click', () => {
-      todoItem.removeTodo(todoItem.id);
+      project.removeTodo(todo.id); // Deletes todo
+      saveAll(); // So deletion is saved
+      renderTodo(project); // Redraw the list without the deleted task
     });
   });
 }
