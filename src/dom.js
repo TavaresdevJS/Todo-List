@@ -39,11 +39,23 @@ export function renderProject() {
     const projectItem = document.createElement('li');
 
     projectItem.classList.add('project-item');
-
-    projectItem.textContent = project.name;
     projectItem.dataset.id = project.id;
 
+    const projectText = document.createElement('span');
+    projectText.classList.add('project-text');
+    projectText.textContent = project.name;
+
+    const projectDeleteBtn = document.createElement('button');
+    projectDeleteBtn.classList.add('project-delete-button');
+    projectDeleteBtn.textContent = 'X';
+
     projectList.appendChild(projectItem);
+    projectItem.appendChild(projectText);
+    projectItem.appendChild(projectDeleteBtn);
+
+    projectDeleteBtn.addEventListener('click', () => {
+      project.deleteProject(project.id);
+    });
   });
 }
 
