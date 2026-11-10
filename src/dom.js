@@ -8,6 +8,7 @@ import {
   findProject,
   saveAll,
   deleteProject,
+  collectTasks,
 } from './projectManager.js';
 import { format, parseISO } from 'date-fns'; // Date format API
 
@@ -183,3 +184,5 @@ todoForm.addEventListener('submit', e => {
   todoToggle();
   todoForm.reset();
 });
+
+console.log(collectTasks());

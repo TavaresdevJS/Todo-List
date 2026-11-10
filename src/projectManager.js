@@ -22,6 +22,15 @@ export function getProjects() {
   return projects;
 }
 
+//Collect all tasks
+export function collectTasks() {
+  const tasks = [];
+  for (const project of projects) {
+    tasks.push(...project.todos);
+  }
+  return tasks;
+}
+
 //Default project function
 let inbox;
 
