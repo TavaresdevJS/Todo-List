@@ -58,7 +58,7 @@ export function renderProject() {
       e.stopPropagation();
       deleteProject(project.id);
       renderProject();
-      if (project === currentProject.id) showProject(defaultProject());
+      if (project === currentProject) showProject(defaultProject());
     });
   });
 }
