@@ -90,9 +90,15 @@ export function renderTodo(project) {
       renderTodo(project);
     });
 
-    const date = parseISO(todo.dueDate);
-    const formattedDate = format(date, 'MMM d');
-    todoText.textContent = `${todo.title} ${formattedDate}`;
+    if (todo.dueDate) {
+      // If statement for guard clause
+      const date = parseISO(todo.dueDate);
+      const formattedDate = format(date, 'MMM d');
+      todoText.textContent = `${todo.title} ${formattedDate}`;
+    } else {
+      todoText.textContent = todo.title;
+    }
+
     todoDeleteBtn.textContent = 'X';
 
     todoItem.appendChild(checkBox);
