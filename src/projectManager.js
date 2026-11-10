@@ -1,6 +1,7 @@
 // projectManager.js
 import { Project } from './project.js';
 import { loadProjects, saveProjects } from './storage.js';
+import { isToday, parseISO } from 'date-fns';
 
 let projects = loadProjects();
 
@@ -29,6 +30,15 @@ export function collectTasks() {
     tasks.push(...project.todos);
   }
   return tasks;
+}
+
+//Filter today's tasks
+
+export function filterTodayTasks() {
+  const todayDates = collectTasks().filter(date =>
+    isToday(parseISO(date.dueDate)),
+  );
+  return todayDates;
 }
 
 //Default project function
