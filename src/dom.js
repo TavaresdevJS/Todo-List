@@ -91,7 +91,7 @@ export function renderTodo(project) {
     });
 
     if (todo.dueDate) {
-      // If statement for guard clause
+      // Show date only if the task has one
       const date = parseISO(todo.dueDate);
       const formattedDate = format(date, 'MMM d');
       todoText.textContent = `${todo.title} ${formattedDate}`;
