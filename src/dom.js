@@ -9,6 +9,7 @@ import {
   saveAll,
   deleteProject,
 } from './projectManager.js';
+import { format, parseISO } from 'date-fns'; // Date format API
 
 // Sidebar
 const inboxBtn = document.querySelector('[data-view="inbox"]');
@@ -89,7 +90,9 @@ export function renderTodo(project) {
       renderTodo(project);
     });
 
-    todoText.textContent = `${todo.title} ${todo.dueDate}`;
+    const date = parseISO(todo.dueDate);
+    const formattedDate = format(date, 'MMM d');
+    todoText.textContent = `${todo.title} ${formattedDate}`;
     todoDeleteBtn.textContent = 'X';
 
     todoItem.appendChild(checkBox);
