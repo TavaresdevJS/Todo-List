@@ -66,10 +66,10 @@ export function renderProject() {
   });
 }
 
-export function renderTodo(project) {
+export function renderTodo(todos) {
   todoList.innerHTML = '';
 
-  project.todos.forEach(todo => {
+  todos.forEach(todo => {
     const todoItem = document.createElement('li');
     todoItem.classList.add('todo-item');
     todoItem.dataset.id = todo.id;
@@ -89,7 +89,7 @@ export function renderTodo(project) {
     checkBox.addEventListener('change', () => {
       todo.toggleComplete();
       saveAll();
-      renderTodo(project);
+      renderTodo(currentProject.todos);
     });
 
     if (todo.dueDate) {
@@ -109,16 +109,16 @@ export function renderTodo(project) {
     todoItem.appendChild(todoDeleteBtn);
 
     todoDeleteBtn.addEventListener('click', () => {
-      project.removeTodo(todo.id); // Deletes todo
+      currentProject.removeTodo(todo.id); // Deletes todo
       saveAll(); // So deletion is saved
-      renderTodo(project); // Redraw the list without the deleted task
+      renderTodo(currentProject.todos); // Redraw the list without the deleted task
     });
   });
 }
 
 export function showProject(project) {
   currentProject = project;
-  renderTodo(project);
+  renderTodo(project.todos);
   viewTitle.textContent = project.name;
 }
 
@@ -181,7 +181,7 @@ todoForm.addEventListener('submit', e => {
   );
   currentProject.addTodo(todo);
   saveAll();
-  renderTodo(currentProject);
+  renderTodo(currentProject.todos);
   todoToggle();
   todoForm.reset();
 });
