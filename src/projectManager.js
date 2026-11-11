@@ -50,6 +50,14 @@ export function filterWeekTasks() {
   return weekDates;
 }
 
+// FIlter upcoming tasks
+export function filterUpcomingTasks() {
+  const upcomingDates = collectTasks().filter(todo =>
+    isFuture(parseISO(todo.dueDate)),
+  );
+  return upcomingDates;
+}
+
 //Default project function
 let inbox;
 
