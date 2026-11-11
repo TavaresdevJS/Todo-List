@@ -13,6 +13,7 @@ import {
   deleteTodo,
   filterWeekTasks,
   filterUpcomingTasks,
+  filterCompletedTasks,
 } from './projectManager.js';
 import { format, parseISO } from 'date-fns'; // Date format API
 
@@ -21,6 +22,7 @@ const inboxBtn = document.querySelector('[data-view="inbox"]');
 const todayBtn = document.querySelector('[data-view="today"]');
 const weekBtn = document.querySelector('[data-view="week"]');
 const upcomingBtn = document.querySelector('[data-view="upcoming"]');
+const completedBtn = document.querySelector('[data-view="completed"]');
 const projectList = document.getElementById('project-list');
 const addProjectBtn = document.getElementById('add-project');
 
@@ -176,6 +178,12 @@ upcomingBtn.addEventListener('click', () => {
   currentView = 'upcoming';
   renderTodo(filterUpcomingTasks());
   viewTitle.textContent = 'Upcoming';
+});
+
+completedBtn.addEventListener('click', () => {
+  currentView = 'completed';
+  renderTodo(filterCompletedTasks());
+  viewTitle.textContent = 'Completed';
 });
 
 function hiddenToggle() {
