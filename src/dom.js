@@ -66,7 +66,7 @@ export function renderProject() {
       e.stopPropagation();
       deleteProject(project.id);
       renderProject();
-      if (currentView === 'today') {
+      if (currentView === 'project') {
         // Stay on Today, but don't leave currentProject pointing at a deleted project
         if (project === currentProject) currentProject = defaultProject();
         refreshView(); // re-filter so the deleted project's tasks disappear
@@ -213,7 +213,7 @@ todoForm.addEventListener('submit', e => {
     todoPriority.value,
   );
 
-  if (currentView === 'today') {
+  if (currentView === 'project') {
     defaultProject().addTodo(todo);
   } else {
     currentProject.addTodo(todo);
