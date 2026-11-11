@@ -67,7 +67,7 @@ export function deleteTodo(id) {
   for (const project of projects) {
     if (project.findTodo(id)) {
       project.removeTodo(id);
-      saveAll();
+      saveAll(); // So deletion is saved
       return;
     }
   }

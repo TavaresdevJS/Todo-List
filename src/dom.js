@@ -10,6 +10,7 @@ import {
   deleteProject,
   collectTasks,
   filterTodayTasks,
+  deleteTodo,
 } from './projectManager.js';
 import { format, parseISO } from 'date-fns'; // Date format API
 
@@ -110,8 +111,7 @@ export function renderTodo(todos) {
     todoItem.appendChild(todoDeleteBtn);
 
     todoDeleteBtn.addEventListener('click', () => {
-      currentProject.removeTodo(todo.id); // Deletes todo
-      saveAll(); // So deletion is saved
+      deleteTodo(todo.id); // Deletes todo
       renderTodo(currentProject.todos); // Redraw the list without the deleted task
     });
   });
