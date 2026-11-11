@@ -136,6 +136,8 @@ export function showProject(project) {
 export function refreshView() {
   if (currentView === 'today') {
     renderTodo(filterTodayTasks());
+  } else if (currentView === 'week') {
+    renderTodo(filterWeekTasks());
   } else {
     renderTodo(currentProject.todos);
   }
