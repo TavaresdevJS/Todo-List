@@ -58,6 +58,12 @@ export function filterUpcomingTasks() {
   return upcomingDates;
 }
 
+// Filter completed tasks
+export function filterCompletedTasks() {
+  const completedTasks = collectTasks().filter(todo => todo.completed);
+  return completedTasks;
+}
+
 //Default project function
 let inbox;
 
