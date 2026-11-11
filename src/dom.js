@@ -144,6 +144,8 @@ export function refreshView() {
     renderTodo(filterWeekTasks());
   } else if (currentView === 'upcoming') {
     renderTodo(filterUpcomingTasks());
+  } else if (currentView === 'completed') {
+    renderTodo(filterCompletedTasks);
   } else {
     renderTodo(currentProject.todos);
   }
