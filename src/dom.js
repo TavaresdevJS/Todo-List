@@ -11,12 +11,14 @@ import {
   collectTasks,
   filterTodayTasks,
   deleteTodo,
+  filterWeekTasks,
 } from './projectManager.js';
 import { format, parseISO } from 'date-fns'; // Date format API
 
 // Sidebar
 const inboxBtn = document.querySelector('[data-view="inbox"]');
 const todayBtn = document.querySelector('[data-view="today"]');
+const weekBtn = document.querySelector('[data-view="week"]');
 const projectList = document.getElementById('project-list');
 const addProjectBtn = document.getElementById('add-project');
 
@@ -156,6 +158,12 @@ todayBtn.addEventListener('click', () => {
   currentView = 'today';
   renderTodo(filterTodayTasks());
   viewTitle.textContent = 'Today';
+});
+
+weekBtn.addEventListener('click', () => {
+  currentView = 'week';
+  renderTodo(filterWeekTasks());
+  viewTitle.textContent = 'This Week';
 });
 
 function hiddenToggle() {
