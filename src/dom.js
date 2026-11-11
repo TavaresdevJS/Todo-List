@@ -37,6 +37,7 @@ const todoPriority = document.getElementById('todo-priority');
 const todoDescription = document.getElementById('todo-description-input');
 
 let currentProject;
+let currentView = 'project';
 
 export function renderProject() {
   projectList.innerHTML = '';
@@ -119,6 +120,7 @@ export function renderTodo(todos) {
 
 export function showProject(project) {
   currentProject = project;
+  currentView = 'project';
   renderTodo(project.todos);
   viewTitle.textContent = project.name;
 }
@@ -137,6 +139,7 @@ inboxBtn.addEventListener('click', () => {
 });
 
 todayBtn.addEventListener('click', () => {
+  currentView = 'today';
   renderTodo(filterTodayTasks());
   viewTitle.textContent = 'Today';
 });
