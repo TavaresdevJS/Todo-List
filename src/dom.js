@@ -125,6 +125,14 @@ export function showProject(project) {
   viewTitle.textContent = project.name;
 }
 
+export function refreshView() {
+  if (currentView === 'today') {
+    renderTodo(filterTodayTasks());
+  } else {
+    renderTodo(currentProject.todos);
+  }
+}
+
 projectList.addEventListener('click', e => {
   const li = e.target.closest('li');
 
