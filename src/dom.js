@@ -196,9 +196,17 @@ todoForm.addEventListener('submit', e => {
     todoDate.value,
     todoPriority.value,
   );
-  currentProject.addTodo(todo);
+
+  if (currentView === 'today') {
+    defaultProject().addTodo(todo);
+  } else {
+    currentProject.addTodo(todo);
+  }
+
   saveAll();
-  renderTodo(currentProject.todos);
+  refreshView();
+
+  // Close and reset the form
   todoToggle();
   todoForm.reset();
 });
