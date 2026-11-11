@@ -140,6 +140,8 @@ export function refreshView() {
     renderTodo(filterTodayTasks());
   } else if (currentView === 'week') {
     renderTodo(filterWeekTasks());
+  } else if (currentView === 'upcoming') {
+    renderTodo(filterUpcomingTasks());
   } else {
     renderTodo(currentProject.todos);
   }
