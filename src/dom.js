@@ -92,7 +92,7 @@ export function renderTodo(todos) {
     checkBox.addEventListener('change', () => {
       todo.toggleComplete();
       saveAll();
-      renderTodo(currentProject.todos);
+      refreshView();
     });
 
     if (todo.dueDate) {
@@ -113,7 +113,7 @@ export function renderTodo(todos) {
 
     todoDeleteBtn.addEventListener('click', () => {
       deleteTodo(todo.id); // Deletes todo
-      renderTodo(currentProject.todos); // Redraw the list without the deleted task
+      refreshView(); // Redraw the list without the deleted task
     });
   });
 }
