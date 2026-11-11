@@ -1,7 +1,7 @@
 // projectManager.js
 import { Project } from './project.js';
 import { loadProjects, saveProjects } from './storage.js';
-import { isToday, parseISO } from 'date-fns';
+import { isToday, isThisWeek, isFuture, parseISO } from 'date-fns';
 
 let projects = loadProjects();
 
@@ -39,6 +39,15 @@ export function filterTodayTasks() {
     isToday(parseISO(date.dueDate)),
   );
   return todayDates;
+}
+
+// Filter week tasks
+
+export function filterWeekTasks() {
+  const weekDates = collectTasks().filter(date =>
+    isThisWeek(parseISO(date.dueDate), { weekStartsOn: 1 }),
+  );
+  return weekDates;
 }
 
 //Default project function
