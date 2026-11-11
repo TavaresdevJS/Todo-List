@@ -145,7 +145,7 @@ export function refreshView() {
   } else if (currentView === 'upcoming') {
     renderTodo(filterUpcomingTasks());
   } else if (currentView === 'completed') {
-    renderTodo(filterCompletedTasks);
+    renderTodo(filterCompletedTasks());
   } else {
     renderTodo(currentProject.todos);
   }
