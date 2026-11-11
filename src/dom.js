@@ -15,6 +15,7 @@ import { format, parseISO } from 'date-fns'; // Date format API
 
 // Sidebar
 const inboxBtn = document.querySelector('[data-view="inbox"]');
+const todayBtn = document.querySelector('[data-view="today"]');
 const projectList = document.getElementById('project-list');
 const addProjectBtn = document.getElementById('add-project');
 
@@ -133,6 +134,11 @@ projectList.addEventListener('click', e => {
 
 inboxBtn.addEventListener('click', () => {
   showProject(defaultProject());
+});
+
+todayBtn.addEventListener('click', () => {
+  renderTodo(filterTodayTasks());
+  viewTitle.textContent = 'Today';
 });
 
 function hiddenToggle() {

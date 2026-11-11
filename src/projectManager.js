@@ -62,6 +62,15 @@ export function deleteProject(id) {
   saveAll(); // save the change
 }
 
+//Delete todo
+export function deleteTodo(id) {
+  for (const project of projects) {
+    if (project.fincTodo(id)) {
+      projects.
+    }
+  }
+}
+
 //Find project
 export function findProject(id) {
   return projects.find(project => project.id === id);
