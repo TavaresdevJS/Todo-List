@@ -97,7 +97,7 @@ export function renderTodo(todos) {
     priority.classList.add('priority');
 
     const descriptionText = document.createElement('p');
-    descriptionText.classList.add('description-text', 'hidden');
+    descriptionText.classList.add('description-text');
 
     const descriptionWrapper = document.createElement('div');
     descriptionWrapper.classList.add('description-wrapper', 'hidden');
@@ -140,6 +140,10 @@ export function renderTodo(todos) {
     todoDeleteBtn.addEventListener('click', () => {
       deleteTodo(todo.id); // Deletes todo
       refreshView(); // Redraw the list without the deleted task
+    });
+
+    todoText.addEventListener('click', () => {
+      descriptionWrapper.classList.toggle('hidden');
     });
 
     descriptionText.addEventListener('click', () => {
