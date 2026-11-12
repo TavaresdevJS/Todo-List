@@ -96,6 +96,9 @@ export function renderTodo(todos) {
     const priority = document.createElement('span');
     priority.classList.add('priority');
 
+    const descriptionText = document.createElement('p');
+    descriptionText.classList.add('description-text', 'hidden');
+
     const todoDeleteBtn = document.createElement('button');
     todoDeleteBtn.classList.add('todo-delete-btn');
 
@@ -121,16 +124,21 @@ export function renderTodo(todos) {
 
     todoDeleteBtn.textContent = 'X';
     priority.textContent = todo.priority;
+    descriptionText.textContent = todo.description;
 
     todoItem.appendChild(checkBox);
     todoList.appendChild(todoItem);
     todoItem.appendChild(todoText);
     todoItem.appendChild(priority);
     todoItem.appendChild(todoDeleteBtn);
+    todoItem.appendChild(descriptionText);
 
     todoDeleteBtn.addEventListener('click', () => {
       deleteTodo(todo.id); // Deletes todo
       refreshView(); // Redraw the list without the deleted task
+    });
+    todoText.addEventListener('click', () => {
+      descriptionText.classList.toggle('hidden');
     });
   });
 }
