@@ -159,6 +159,14 @@ export function renderTodo(todos) {
       const closeEditor = () => {
         descriptionWrapper.replaceChildren(descriptionText);
       };
+
+      saveBtn.addEventListener('click', () => {
+        todo.description = editor.value.trim();
+        saveAll();
+        descriptionText.textContent =
+          todo.description || 'Add a description...';
+        closeEditor();
+      });
     });
   });
 }
