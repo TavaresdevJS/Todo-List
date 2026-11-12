@@ -154,6 +154,11 @@ export function renderTodo(todos) {
       const cancelBtn = document.createElement('button');
       cancelBtn.classList.add('description-cancel-btn');
       cancelBtn.textContent = 'Cancel';
+
+      // Swap the editor out and put the p element back
+      const closeEditor = () => {
+        descriptionWrapper.replaceChildren(descriptionText);
+      };
     });
   });
 }
