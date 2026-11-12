@@ -128,21 +128,23 @@ export function renderTodo(todos) {
 
     todoDeleteBtn.textContent = 'X';
     priority.textContent = todo.priority;
-    descriptionText.textContent = todo.description;
+    descriptionText.textContent = todo.description || 'Add a description...';
 
     todoItem.appendChild(checkBox);
     todoList.appendChild(todoItem);
     todoItem.appendChild(todoText);
     todoItem.appendChild(priority);
     todoItem.appendChild(todoDeleteBtn);
-    todoItem.appendChild(descriptionText);
+    todoItem.appendChild(descriptionWrapper);
 
     todoDeleteBtn.addEventListener('click', () => {
       deleteTodo(todo.id); // Deletes todo
       refreshView(); // Redraw the list without the deleted task
     });
-    todoText.addEventListener('click', () => {
-      descriptionText.classList.toggle('hidden');
+    descriptionText.addEventListener('click', () => {
+      const editor = document.createElement('textarea');
+      editor.classList.add('description-editor');
+      editor.value = todo.description;
     });
   });
 }
