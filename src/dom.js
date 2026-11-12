@@ -169,6 +169,10 @@ export function renderTodo(todos) {
       });
 
       cancelBtn.addEventListener('click', closeEditor);
+
+      // Swap the p element out for the editor
+      descriptionWrapper.replaceChildren(editor, saveBtn, cancelBtn);
+      editor.focus();
     });
   });
 }
