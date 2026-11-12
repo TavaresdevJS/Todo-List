@@ -76,6 +76,10 @@ h6 {
 
 /* above is josh comeau's css reset, below is my own CSS style */
 
+body {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+}
+
 .hidden {
   display: none;
 }
