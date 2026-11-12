@@ -93,6 +93,9 @@ export function renderTodo(todos) {
     const todoText = document.createElement('span');
     todoText.classList.add('todo-text');
 
+    const priority = document.createElement('span');
+    priority.classList.add('priority');
+
     const todoDeleteBtn = document.createElement('button');
     todoDeleteBtn.classList.add('todo-delete-btn');
 
@@ -108,7 +111,7 @@ export function renderTodo(todos) {
     });
 
     if (todo.dueDate) {
-      // Show date only if the task has one
+      // Show date only if the task has onee
       const date = parseISO(todo.dueDate);
       const formattedDate = format(date, 'MMM d');
       todoText.textContent = `${todo.title} ${formattedDate}`;
@@ -117,10 +120,12 @@ export function renderTodo(todos) {
     }
 
     todoDeleteBtn.textContent = 'X';
+    priority.textContent = todo.priority;
 
     todoItem.appendChild(checkBox);
     todoList.appendChild(todoItem);
     todoItem.appendChild(todoText);
+    todoItem.appendChild(priority);
     todoItem.appendChild(todoDeleteBtn);
 
     todoDeleteBtn.addEventListener('click', () => {
