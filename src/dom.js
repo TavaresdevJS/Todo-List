@@ -297,6 +297,3 @@ todoForm.addEventListener('submit', e => {
   todoToggle();
   todoForm.reset();
 });
-
-console.log(collectTasks());
-console.log(filterTodayTasks());
