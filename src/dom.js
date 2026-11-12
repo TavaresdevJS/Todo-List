@@ -99,6 +99,10 @@ export function renderTodo(todos) {
     const descriptionText = document.createElement('p');
     descriptionText.classList.add('description-text', 'hidden');
 
+    const descriptionWrapper = document.createElement('div');
+    descriptionWrapper.classList.add('description-wrapper', 'hidden');
+    descriptionWrapper.appendChild(descriptionText);
+
     const todoDeleteBtn = document.createElement('button');
     todoDeleteBtn.classList.add('todo-delete-btn');
 
