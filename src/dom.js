@@ -141,10 +141,19 @@ export function renderTodo(todos) {
       deleteTodo(todo.id); // Deletes todo
       refreshView(); // Redraw the list without the deleted task
     });
+
     descriptionText.addEventListener('click', () => {
       const editor = document.createElement('textarea');
       editor.classList.add('description-editor');
       editor.value = todo.description;
+
+      const saveBtn = document.createElement('button');
+      saveBtn.classList.add('description-save-btn');
+      saveBtn.textContent = 'Save';
+
+      const cancelBtn = document.createElement('button');
+      cancelBtn.classList.add('description-cancel-btn');
+      cancelBtn.textContent = 'Cancel';
     });
   });
 }
