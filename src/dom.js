@@ -167,6 +167,8 @@ export function renderTodo(todos) {
           todo.description || 'Add a description...';
         closeEditor();
       });
+
+      cancelBtn.addEventListener('click', closeEditor);
     });
   });
 }
