@@ -80,7 +80,7 @@ body {
   font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
   display: grid;
   min-height: 100vh;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 15% 1fr;
 }
 
 .nav {
@@ -88,12 +88,13 @@ body {
 }
 
 .nav button:hover {
-  color: #f2efed;
+  background-color: #f2efed;
 }
 
 .main {
   background-color: #ffffff;
   color: #202020;
+  padding: 32px 48px;
 }
 .hidden {
   display: none;
