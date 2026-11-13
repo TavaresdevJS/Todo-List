@@ -1,6 +1,6 @@
 // project.js
 
-// Blueprint for a fingle project, each `new Project(...)` will create one project object
+// Blueprint for a single project, each `new Project(...)` will create one project object
 export class Project {
   constructor(name) {
     this.name = name;
