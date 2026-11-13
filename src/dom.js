@@ -8,7 +8,6 @@ import {
   findProject,
   saveAll,
   deleteProject,
-  collectTasks,
   filterTodayTasks,
   deleteTodo,
   filterWeekTasks,
