@@ -78,8 +78,23 @@ h6 {
 
 body {
   font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  display: grid;
+  min-height: 100vh;
+  grid-template-columns: 1fr 1fr;
 }
 
+.nav {
+  background-color: #fcfaf8;
+}
+
+.nav button:hover {
+  color: #f2efed;
+}
+
+.main {
+  background-color: #ffffff;
+  color: #202020;
+}
 .hidden {
   display: none;
 }
