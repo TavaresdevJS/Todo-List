@@ -100,12 +100,28 @@ body {
   border: none;
   padding: 8px 12px;
   color: inherit;
+  text-align: left;
+  border-radius: 6px;
+  cursor: pointer;
 }
 
 .nav button:hover {
   background-color: #f2efed;
-  border-radius: 6px;
-  cursor: pointer;
+}
+
+.nav-projects {
+  margin-top: 24px;
+}
+
+.nav-projects h2 {
+  font-size: 14px;
+  padding: 0 12px;
+  color: #666666;
+}
+
+#project-list {
+  list-style: none;
+  padding: 0;
 }
 
 .main {
