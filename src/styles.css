@@ -381,3 +381,61 @@ html {
 .priority-low {
   color: #5297ff;
 }
+
+#add-task {
+  margin-top: 8px;
+  padding: 8px 0;
+  background-color: transparent;
+  color: #8a8a8a;
+  border: none;
+  cursor: pointer;
+}
+
+#add-task::before {
+  content: '+ ';
+  color: #ff7066;
+}
+
+#add-task:hover {
+  color: #ff7066;
+}
+
+.todo-form {
+  margin-top: 8px;
+  padding: 12px 16px 16px;
+  border: 1px solid #3d3d3d;
+  border-radius: 10px;
+}
+
+.todo-form-body {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.todo-form-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 12px;
+}
+
+/* Inline description editor */
+.description-editor {
+  margin-top: 6px;
+  resize: vertical;
+}
+
+.description-save-btn,
+.description-cancel-btn {
+  margin-top: 6px;
+  margin-right: 6px;
+}
+
+.description-cancel-btn {
+  padding: 6px 14px;
+  background-color: #363636;
+  color: inherit;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
