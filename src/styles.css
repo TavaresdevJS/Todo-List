@@ -369,3 +369,15 @@ html {
   color: #b3b3b3;
   cursor: pointer;
 }
+
+.priority-high {
+  color: #ff7066;
+}
+
+.priority-medium {
+  color: #ff9a14;
+}
+
+.priority-low {
+  color: #5297ff;
+}

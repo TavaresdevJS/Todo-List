@@ -97,6 +97,7 @@ export function renderTodo(todos) {
 
     const priority = document.createElement('span');
     priority.classList.add('priority');
+    if (todo.priority) priority.classList.add(`priority-${todo.priority}`);
 
     const descriptionText = document.createElement('p');
     descriptionText.classList.add('description-text');
