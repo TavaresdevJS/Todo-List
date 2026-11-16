@@ -255,3 +255,29 @@ html {
   text-align: center;
   cursor: pointer;
 }
+
+.btn:hover,
+.nav .btn:hover,
+.description-save-btn:hover {
+  background-color: #c3392c;
+}
+
+.large-btn {
+  width: 100%;
+}
+
+.nav .close-project-btn,
+.close-todo-btn {
+  padding: 2px 8px;
+  background-color: transparent;
+  color: #8a8a8a;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.nav .close-project-btn:hover,
+.close-todo-btn:hover {
+  background-color: #363636;
+  color: #e6e6e6;
+}
