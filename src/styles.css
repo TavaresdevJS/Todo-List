@@ -81,11 +81,17 @@ body {
   display: grid;
   min-height: 100vh;
   grid-template-columns: 280px 1fr;
-  color: #202020;
+  color: #e6e6e6;
+}
+
+/* Tells the browser the page is dark, so inputs, selects,
+   checkboxes and scrollbars get dark versions too */
+html {
+  color-scheme: dark;
 }
 
 .nav {
-  background-color: #fcfaf8;
+  background-color: #282828;
   padding: 16px 12px;
 }
 
@@ -106,7 +112,7 @@ body {
 }
 
 .nav button:hover {
-  background-color: #f2efed;
+  background-color: #363636;
 }
 
 .nav-projects {
@@ -116,7 +122,7 @@ body {
 .nav-projects h2 {
   font-size: 14px;
   padding: 0 12px;
-  color: #666666;
+  color: #b3b3b3;
 }
 
 #project-list {
@@ -124,10 +130,32 @@ body {
   padding: 0;
 }
 
+.project-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  border-radius: 6px;
+}
+
+.project-item:hover {
+  background-color: #363636;
+  cursor: pointer;
+}
+
+/* Selected view or project. Must stay AFTER the hover rules above,
+   so a selected item stays red while you hover it */
+.nav button.selected,
+.project-item.selected {
+  background-color: #4b2a27;
+  color: #ff7066;
+}
+
 .main {
-  background-color: #ffffff;
+  background-color: #1f1f1f;
   padding: 32px 48px;
 }
+
 .hidden {
   display: none;
 }
@@ -143,24 +171,11 @@ body {
   align-items: center;
   gap: 0.75rem;
   padding: 0.5rem 0.75rem;
-  border-bottom: 1px solid #e5e5e5;
+  border-bottom: 1px solid #333333;
   list-style: none;
 }
 
 .description-wrapper {
   flex-basis: 100%;
   padding-left: 1.75rem;
-}
-
-/* Javascript DOM elements */
-
-.project-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 8px 12px;
-}
-
-.project-item:hover {
-  background-color: #f2efed;
 }

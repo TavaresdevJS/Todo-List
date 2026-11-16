@@ -78,6 +78,9 @@ export function renderProject() {
       }
     });
   });
+
+  // The rows were just rebuilt, so re-apply the highlight
+  updateSelected();
 }
 
 export function renderTodo(todos) {
@@ -185,6 +188,27 @@ export function showProject(project) {
   currentView = 'project';
   renderTodo(project.todos);
   viewTitle.textContent = project.name;
+  updateSelected();
+}
+
+// Highlight whatever is open in the sidebar: a view button or a project row
+function updateSelected() {
+  // 1. Remove the highlight from everything
+  document
+    .querySelectorAll('.nav .selected')
+    .forEach(el => el.classList.remove('selected'));
+
+  // 2. Add it to the one thing that is open right now
+  let selectedEl;
+  if (currentView !== 'project') {
+    selectedEl = document.querySelector(`[data-view="${currentView}"]`);
+  } else if (currentProject === defaultProject()) {
+    selectedEl = inboxBtn; // The default project is shown as "Inbox"
+  } else if (currentProject) {
+    selectedEl = projectList.querySelector(`[data-id="${currentProject.id}"]`);
+  }
+
+  if (selectedEl) selectedEl.classList.add('selected');
 }
 
 export function refreshView() {
@@ -218,24 +242,28 @@ todayBtn.addEventListener('click', () => {
   currentView = 'today';
   renderTodo(filterTodayTasks());
   viewTitle.textContent = 'Today';
+  updateSelected();
 });
 
 weekBtn.addEventListener('click', () => {
   currentView = 'week';
   renderTodo(filterWeekTasks());
   viewTitle.textContent = 'This Week';
+  updateSelected();
 });
 
 upcomingBtn.addEventListener('click', () => {
   currentView = 'upcoming';
   renderTodo(filterUpcomingTasks());
   viewTitle.textContent = 'Upcoming';
+  updateSelected();
 });
 
 completedBtn.addEventListener('click', () => {
   currentView = 'completed';
   renderTodo(filterCompletedTasks());
   viewTitle.textContent = 'Completed';
+  updateSelected();
 });
 
 function hiddenToggle() {
