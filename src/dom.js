@@ -1,4 +1,8 @@
 // dom.js
+// Everything that touches the page lives here: drawing projects and tasks,
+// and wiring up the sidebar, buttons and forms.
+// The data itself (projects, todos, localStorage) is handled in projectManager.js,
+// so this file reads from it and asks it to make changes, then redraws.
 import { Todo } from './todo.js';
 import {
   addProject,
@@ -13,7 +17,9 @@ import {
   filterUpcomingTasks,
   filterCompletedTasks,
 } from './projectManager.js';
-import { format, parseISO } from 'date-fns'; // Date format API
+import { format, parseISO } from 'date-fns';
+
+// ==== DOM references (looked up once, reused everywhere) ====
 
 // Sidebar
 const inboxBtn = document.querySelector('[data-view="inbox"]');
@@ -40,18 +46,28 @@ const todoDate = document.getElementById('todo-date-input');
 const todoPriority = document.getElementById('todo-priority');
 const todoDescription = document.getElementById('todo-description-input');
 
+// ==== App state ====
+
+// What's on screen right now.
+// currentView is 'project' when a project (or the Inbox) is open,
+// otherwise the name of a filter view. The filter names match the
+// data-view attributes in the HTML, so updateSelected() can find the button.
 let currentProject;
 let currentView = 'project';
 
+// ==== Sidebar: draw the project list ====
+
+// Rebuild the sidebar project list from the data
 export function renderProject() {
-  projectList.innerHTML = '';
+  projectList.innerHTML = ''; // clear old rows before redrawing
   getProjects().forEach(project => {
-    if (project === defaultProject()) return;
+    if (project === defaultProject()) return; // Inbox has its own button, skip it here
     const projectItem = document.createElement('li');
 
     projectItem.classList.add('project-item');
-    projectItem.dataset.id = project.id;
+    projectItem.dataset.id = project.id; // lets the <ul> click listener know which project was clicked
 
+    // Name in its own span, so it sits beside the X without wiping it
     const projectText = document.createElement('span');
     projectText.classList.add('project-text');
     projectText.textContent = project.name;
@@ -65,15 +81,15 @@ export function renderProject() {
     projectItem.appendChild(projectDeleteBtn);
 
     projectDeleteBtn.addEventListener('click', e => {
-      e.stopPropagation();
+      e.stopPropagation(); // don't let the click bubble up and "open" the project we're deleting
       deleteProject(project.id);
       renderProject();
       if (currentView !== 'project') {
-        // Stay on Today, but don't leave currentProject pointing at a deleted project
+        // On a filter view: stay there, but don't leave currentProject pointing at a deleted project
         if (project === currentProject) currentProject = defaultProject();
         refreshView(); // re-filter so the deleted project's tasks disappear
       } else if (project === currentProject) {
-        showProject(defaultProject());
+        showProject(defaultProject()); // the open project is gone, fall back to the Inbox
       }
     });
   });
@@ -82,6 +98,11 @@ export function renderProject() {
   updateSelected();
 }
 
+// ==== Main area: draw the task list ====
+
+// Rebuild the task list for whatever todos are passed in.
+// Listeners are attached per task inside the loop, so each one can use
+// `todo` directly (closure) instead of looking the task up by id later.
 export function renderTodo(todos) {
   todoList.innerHTML = '';
 
@@ -89,18 +110,19 @@ export function renderTodo(todos) {
     const todoItem = document.createElement('li');
     todoItem.classList.add('todo-item');
     todoItem.dataset.id = todo.id;
-    if (todo.completed === true) todoItem.classList.toggle('checked');
+    if (todo.completed === true) todoItem.classList.toggle('checked'); // strikes through the title in CSS
 
     const todoText = document.createElement('span');
     todoText.classList.add('todo-text');
 
     const priority = document.createElement('span');
     priority.classList.add('priority');
-    if (todo.priority) priority.classList.add(`priority-${todo.priority}`);
+    if (todo.priority) priority.classList.add(`priority-${todo.priority}`); // e.g. priority-high, CSS colours the pill
 
     const descriptionText = document.createElement('p');
     descriptionText.classList.add('description-text');
 
+    // Description starts collapsed, clicking the title toggles it
     const descriptionWrapper = document.createElement('div');
     descriptionWrapper.classList.add('description-wrapper', 'hidden');
     descriptionWrapper.appendChild(descriptionText);
@@ -113,14 +135,17 @@ export function renderTodo(todos) {
     checkBox.checked = todo.completed;
     checkBox.classList.add('todo-check');
 
+    // Redraw instead of only toggling the class, so a task that no longer
+    // belongs in the current view (e.g. completed while on "Today") disappears
     checkBox.addEventListener('change', () => {
       todo.toggleComplete();
       saveAll();
       refreshView();
     });
 
+    // The date input gives a 'YYYY-MM-DD' string. parseISO turns it into a Date
+    // so date-fns can format it as 'Nov 16'. Tasks without a date show only the title.
     if (todo.dueDate) {
-      // Show date only if the task has onee
       const date = parseISO(todo.dueDate);
       const formattedDate = format(date, 'MMM d');
       todoText.textContent = `${todo.title} ${formattedDate}`;
@@ -139,15 +164,18 @@ export function renderTodo(todos) {
     todoItem.appendChild(todoDeleteBtn);
     todoItem.appendChild(descriptionWrapper);
 
+    // Change the data first, then redraw the list from it
     todoDeleteBtn.addEventListener('click', () => {
-      deleteTodo(todo.id); // Deletes todo
-      refreshView(); // Redraw the list without the deleted task
+      deleteTodo(todo.id);
+      refreshView();
     });
 
     todoText.addEventListener('click', () => {
       descriptionWrapper.classList.toggle('hidden');
     });
 
+    // Inline editing: swap the <p> for a textarea + Save/Cancel, then swap back.
+    // The editor is only created when needed, not for every task up front.
     descriptionText.addEventListener('click', () => {
       const editor = document.createElement('textarea');
       editor.classList.add('description-editor');
@@ -161,11 +189,12 @@ export function renderTodo(todos) {
       cancelBtn.classList.add('description-cancel-btn');
       cancelBtn.textContent = 'Cancel';
 
-      // Swap the editor out and put the p element back
       const closeEditor = () => {
         descriptionWrapper.replaceChildren(descriptionText);
       };
 
+      // Update the text in place instead of calling refreshView(),
+      // otherwise the whole list redraws and the description collapses again
       saveBtn.addEventListener('click', () => {
         todo.description = editor.value.trim();
         saveAll();
@@ -176,13 +205,15 @@ export function renderTodo(todos) {
 
       cancelBtn.addEventListener('click', closeEditor);
 
-      // Swap the p element out for the editor
       descriptionWrapper.replaceChildren(editor, saveBtn, cancelBtn);
       editor.focus();
     });
   });
 }
 
+// ==== Switching views ====
+
+// Open a project. The Inbox is the default project, so it goes through here too.
 export function showProject(project) {
   currentProject = project;
   currentView = 'project';
@@ -191,7 +222,8 @@ export function showProject(project) {
   updateSelected();
 }
 
-// Highlight whatever is open in the sidebar: a view button or a project row
+// Highlight whatever is open in the sidebar: a view button or a project row.
+// Called whenever the view changes or the project list is rebuilt.
 function updateSelected() {
   // Remove the highlight from everything
   document
@@ -211,6 +243,8 @@ function updateSelected() {
   if (selectedEl) selectedEl.classList.add('selected');
 }
 
+// Redraw whatever is currently on screen.
+// Used after any data change (add, delete, complete) to keep the list in sync.
 export function refreshView() {
   if (currentView === 'today') {
     renderTodo(filterTodayTasks());
@@ -225,10 +259,15 @@ export function refreshView() {
   }
 }
 
-projectList.addEventListener('click', e => {
-  const li = e.target.closest('li');
+// ==== Sidebar events ====
 
-  if (!li) return; // Guard clause if click was not inside an <li>
+// Event delegation: one listener on the <ul> instead of one per project.
+// The <li> rows are recreated on every render, but the <ul> is permanent,
+// so this listener never gets lost.
+projectList.addEventListener('click', e => {
+  const li = e.target.closest('li'); // the click may land on the span inside the row
+
+  if (!li) return;
   const projectId = li.dataset.id;
   const projectFound = findProject(projectId);
   showProject(projectFound);
@@ -238,6 +277,7 @@ inboxBtn.addEventListener('click', () => {
   showProject(defaultProject());
 });
 
+// Filter views show tasks from every project, so they don't change currentProject
 todayBtn.addEventListener('click', () => {
   currentView = 'today';
   renderTodo(filterTodayTasks());
@@ -266,6 +306,9 @@ completedBtn.addEventListener('click', () => {
   updateSelected();
 });
 
+// ==== Forms ====
+
+// Show/hide by toggling a class, so how "hidden" looks stays in the CSS
 function hiddenToggle() {
   projectForm.classList.toggle('hidden');
 }
@@ -283,9 +326,10 @@ addTaskBtn.addEventListener('click', todoToggle);
 closeTodoBtn.addEventListener('click', todoToggle);
 
 projectForm.addEventListener('submit', e => {
-  e.preventDefault();
+  e.preventDefault(); // stop the browser from reloading the page
   const name = projectNameInput.value.trim();
 
+  // `required` on the input doesn't catch a name made only of spaces
   if (!name.trim()) {
     alert('Please provide a title');
     return;
@@ -297,7 +341,7 @@ projectForm.addEventListener('submit', e => {
 });
 
 todoForm.addEventListener('submit', e => {
-  e.preventDefault();
+  e.preventDefault(); // stop the browser from reloading the page
   const name = todoNameInput.value.trim();
 
   if (!name.trim()) {
@@ -311,6 +355,8 @@ todoForm.addEventListener('submit', e => {
     todoPriority.value,
   );
 
+  // Filter views (Today, Upcoming...) aren't real projects,
+  // so tasks created from them go to the Inbox
   if (currentView === 'project') {
     currentProject.addTodo(todo);
   } else {
@@ -320,7 +366,6 @@ todoForm.addEventListener('submit', e => {
   saveAll();
   refreshView();
 
-  // Close and reset the form
   todoToggle();
   todoForm.reset();
 });
