@@ -289,6 +289,8 @@ body {
 .todo-text {
   flex: 1;
   cursor: pointer;
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 /* Completed tasks */
@@ -563,4 +565,36 @@ body {
    Kept LAST so it wins over any rule with the same strength */
 .hidden {
   display: none;
+}
+
+/* ======================
+  8. Phone and small tablets
+*/
+
+@media (max-width: 768px) {
+  body {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+  }
+
+  .main {
+    padding: 16px;
+  }
+}
+
+@media (hover: none) {
+  .project-item .project-delete-button,
+  .todo-delete-btn {
+    opacity: 1;
+  }
+
+  .project-item .project-delete-button,
+  .todo-delete-btn {
+    padding: 8px 10px;
+  }
+
+  .todo-check {
+    width: 22px;
+    height: 22px;
+  }
 }
