@@ -76,6 +76,19 @@ h6 {
 
 /* above is josh comeau's css reset, below is my own CSS style */
 
+/* ==========================================================================
+   1. BASE & PAGE LAYOUT
+   ========================================================================== */
+
+/* Tells the browser the page is dark, so inputs, selects,
+   checkboxes and scrollbars get dark versions too */
+html {
+  color-scheme: dark;
+}
+
+/* Two-column page: fixed 280px sidebar on the left,
+   main area takes the remaining space (1fr).
+   color is inherited, so every element gets this text colour */
 body {
   font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
   display: grid;
@@ -84,23 +97,35 @@ body {
   color: #e6e6e6;
 }
 
-/* Tells the browser the page is dark, so inputs, selects,
-   checkboxes and scrollbars get dark versions too */
-html {
-  color-scheme: dark;
-}
+/* ==========================================================================
+   2. SIDEBAR
+   ========================================================================== */
 
 .nav {
   background-color: #282828;
   padding: 16px 12px;
 }
 
+/* 12px left padding lines the logo up with the buttons below */
+.logo {
+  padding: 0 12px;
+  margin-bottom: 16px;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+/* --- View buttons (Inbox, Today, This Week...) --- */
+
+/* Flex column stacks the buttons vertically and stretches them full width */
 .nav-views {
   display: flex;
   flex-direction: column;
   gap: 0.2rem;
 }
 
+/* Every button in the sidebar starts as a plain text row.
+   Specificity: 1 class + 1 element. To override it, use 2 classes
+   (e.g. .nav .btn) or an id (e.g. #add-project) */
 .nav button {
   background-color: transparent;
   border: none;
@@ -115,21 +140,27 @@ html {
   background-color: #363636;
 }
 
+/* --- "My Projects" section --- */
+
 .nav-projects {
   margin-top: 24px;
 }
 
+/* Small, muted section label */
 .nav-projects h2 {
   font-size: 14px;
   padding: 0 12px;
   color: #b3b3b3;
 }
 
+/* Remove the browser's default bullets and 40px indent */
 #project-list {
   list-style: none;
   padding: 0;
 }
 
+/* One row per project (created in dom.js → renderProject):
+   name on the left, X pushed to the right */
 .project-item {
   display: flex;
   justify-content: space-between;
@@ -143,14 +174,8 @@ html {
   cursor: pointer;
 }
 
-/* Selected view or project. Must stay AFTER the hover rules above,
-   so a selected item stays red while you hover it */
-.nav button.selected,
-.project-item.selected {
-  background-color: #4b2a27;
-  color: #ff7066;
-}
-
+/* Project delete X: invisible until its row is hovered.
+   opacity keeps its space, so the row doesn't jump when it appears */
 .project-item .project-delete-button {
   padding: 2px 6px;
   font-size: 12px;
@@ -158,6 +183,7 @@ html {
   opacity: 0;
 }
 
+/* Show it when the row is hovered, or when reached with the Tab key */
 .project-item:hover .project-delete-button,
 .project-item .project-delete-button:focus-visible {
   opacity: 1;
@@ -168,20 +194,61 @@ html {
   background-color: transparent;
 }
 
+/* "+ Add Project" button. The id beats .nav button */
+#add-project {
+  width: 100%;
+  margin-top: 4px;
+  color: #ff7066;
+  font-weight: 500;
+}
+
+/* Adds the "+" without touching the HTML */
+#add-project::before {
+  content: '+ ';
+}
+
+/* --- Selected state --- */
+
+/* Selected view or project (class added by updateSelected() in dom.js).
+   Must stay AFTER the hover rules above, so a selected item
+   stays red while you hover it */
+.nav button.selected,
+.project-item.selected {
+  background-color: #4b2a27;
+  color: #ff7066;
+}
+
+/* ==========================================================================
+   3. MAIN AREA
+   ========================================================================== */
+
 .main {
   background-color: #1f1f1f;
   padding: 32px 48px;
 }
 
-.hidden {
-  display: none;
+/* Centred column: max 800px wide, auto margins split the leftover space */
+.todo-content {
+  max-width: 800px;
+  margin: 0 auto;
 }
 
-.checked .todo-text {
-  text-decoration: line-through;
-  opacity: 0.6;
+#view-title {
+  font-size: 1.5rem;
+  margin-bottom: 16px;
 }
 
+/* Remove the browser's default bullets and 40px indent */
+#todo-list {
+  list-style: none;
+  padding: 0;
+}
+
+/* ==========================================================================
+   4. TASK ROWS (created in dom.js → renderTodo)
+   ========================================================================== */
+
+/* flex-wrap lets the description drop onto its own line */
 .todo-item {
   display: flex;
   flex-wrap: wrap;
@@ -192,36 +259,161 @@ html {
   list-style: none;
 }
 
+/* --- Round checkbox --- */
+
+/* appearance: none removes the browser's checkbox so we can draw a circle.
+   flex-shrink: 0 stops it getting squashed by long titles */
+.todo-check {
+  appearance: none;
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #8a8a8a;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.todo-check:hover {
+  border-color: #e6e6e6;
+}
+
+/* Filled dot with a ring of background colour around it */
+.todo-check:checked {
+  background-color: #8a8a8a;
+  box-shadow: inset 0 0 0 2px #1f1f1f;
+}
+
+/* --- Title --- */
+
+/* flex: 1 takes all free space, pushing priority and X to the right */
+.todo-text {
+  flex: 1;
+  cursor: pointer;
+}
+
+/* Completed tasks */
+.checked .todo-text {
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+
+/* --- Priority pill --- */
+
+.priority {
+  font-size: 12px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background-color: #363636;
+  color: #b3b3b3;
+}
+
+/* Hide the pill when a task has no priority */
+.priority:empty {
+  display: none;
+}
+
+/* Colour per priority. Must stay AFTER .priority (same strength,
+   so the later rule wins) */
+.priority-high {
+  color: #ff7066;
+}
+
+.priority-medium {
+  color: #ff9a14;
+}
+
+.priority-low {
+  color: #5297ff;
+}
+
+/* --- Task delete X: invisible until the row is hovered --- */
+
+.todo-delete-btn {
+  padding: 2px 6px;
+  background-color: transparent;
+  color: #8a8a8a;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  opacity: 0;
+}
+
+.todo-item:hover .todo-delete-btn,
+.todo-delete-btn:focus-visible {
+  opacity: 1;
+}
+
+.todo-delete-btn:hover {
+  color: #ff7066;
+}
+
+/* --- Description (shown when clicking a task title) --- */
+
+/* flex-basis: 100% forces it onto its own line under the title */
 .description-wrapper {
   flex-basis: 100%;
   padding-left: 1.75rem;
 }
 
-#add-project {
-  width: 100%;
-  margin-top: 4px;
-  color: #ff7066;
-  font-weight: 500;
+.description-text {
+  font-size: 13px;
+  color: #b3b3b3;
+  cursor: pointer;
 }
 
-#add-project::before {
+/* Inline description editor (textarea + Save / Cancel).
+   Base field and Save button styles are in section 6 */
+.description-editor {
+  margin-top: 6px;
+  resize: vertical;
+}
+
+.description-save-btn,
+.description-cancel-btn {
+  margin-top: 6px;
+  margin-right: 6px;
+}
+
+/* Quieter gray button: only the main action is red */
+.description-cancel-btn {
+  padding: 6px 14px;
+  background-color: #363636;
+  color: inherit;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* ==========================================================================
+   5. "ADD TASK" BUTTON
+   ========================================================================== */
+
+/* Muted text with a red "+", turns red on hover */
+#add-task {
+  margin-top: 8px;
+  padding: 8px 0;
+  background-color: transparent;
+  color: #8a8a8a;
+  border: none;
+  cursor: pointer;
+}
+
+#add-task::before {
   content: '+ ';
+  color: #ff7066;
 }
 
-.todo-content {
-  max-width: 800px;
-  margin: 0 auto;
+#add-task:hover {
+  color: #ff7066;
 }
 
-#todo-list {
-  list-style: none;
-  padding: 0;
-}
+/* ==========================================================================
+   6. FORMS (project form + task form)
+   Never put "display" on .project-form or .todo-form themselves:
+   it could override .hidden and the form would never hide
+   ========================================================================== */
 
-#view-title {
-  font-size: 1.5rem;
-  margin-bottom: 16px;
-}
+/* --- Shared fields: text inputs, priority select, textareas --- */
 
 .form-control,
 #todo-priority,
@@ -235,6 +427,8 @@ html {
   border-radius: 6px;
 }
 
+/* The red border replaces the browser's focus outline,
+   so focus is still visible */
 .form-control:focus,
 #todo-priority:focus,
 .todo-description:focus,
@@ -242,6 +436,9 @@ html {
   outline: none;
   border-color: #ff7066;
 }
+
+/* --- Red main-action buttons: Submit project, Add task, Save ---
+   .nav .btn is needed to beat .nav button in the sidebar */
 
 .btn,
 .nav .btn,
@@ -266,6 +463,8 @@ html {
   width: 100%;
 }
 
+/* --- Small X close buttons at the top of each form --- */
+
 .nav .close-project-btn,
 .close-todo-btn {
   padding: 2px 8px;
@@ -282,6 +481,9 @@ html {
   color: #e6e6e6;
 }
 
+/* --- Shared form layout --- */
+
+/* Pushes the close X to the right */
 .project-form-header,
 .todo-form-header {
   display: flex;
@@ -295,6 +497,8 @@ html {
   color: #b3b3b3;
 }
 
+/* --- Project form (sidebar) --- */
+
 .project-form {
   margin-top: 8px;
   padding: 8px 12px 12px;
@@ -302,6 +506,7 @@ html {
   border-radius: 8px;
 }
 
+/* Label above input */
 .project-form-body {
   display: flex;
   flex-direction: column;
@@ -309,96 +514,7 @@ html {
   margin-bottom: 10px;
 }
 
-.todo-check {
-  appearance: none;
-  flex-shrink: 0;
-  width: 18px;
-  height: 18px;
-  border: 2px solid #8a8a8a;
-  border-radius: 50%;
-  cursor: pointer;
-}
-
-.todo-check:hover {
-  border-color: #e6e6e6;
-}
-
-.todo-check:checked {
-  background-color: #8a8a8a;
-  box-shadow: inset 0 0 0 2px #1f1f1f;
-}
-
-.todo-text {
-  flex: 1;
-  cursor: pointer;
-}
-
-.priority {
-  font-size: 12px;
-  padding: 2px 8px;
-  border-radius: 999px;
-  background-color: #363636;
-  color: #b3b3b3;
-}
-
-.priority:empty {
-  display: none;
-}
-
-.todo-delete-btn {
-  padding: 2px 6px;
-  background-color: transparent;
-  color: #8a8a8a;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  opacity: 0;
-}
-
-.todo-item:hover .todo-delete-btn,
-.todo-delete-btn:focus-visible {
-  opacity: 1;
-}
-
-.todo-delete-btn:hover {
-  color: #ff7066;
-}
-
-.description-text {
-  font-size: 13px;
-  color: #b3b3b3;
-  cursor: pointer;
-}
-
-.priority-high {
-  color: #ff7066;
-}
-
-.priority-medium {
-  color: #ff9a14;
-}
-
-.priority-low {
-  color: #5297ff;
-}
-
-#add-task {
-  margin-top: 8px;
-  padding: 8px 0;
-  background-color: transparent;
-  color: #8a8a8a;
-  border: none;
-  cursor: pointer;
-}
-
-#add-task::before {
-  content: '+ ';
-  color: #ff7066;
-}
-
-#add-task:hover {
-  color: #ff7066;
-}
+/* --- Task form (main area) --- */
 
 .todo-form {
   margin-top: 8px;
@@ -407,42 +523,26 @@ html {
   border-radius: 10px;
 }
 
+/* Stacks each label above its field */
 .todo-form-body {
   display: flex;
   flex-direction: column;
   gap: 6px;
 }
 
+/* Pushes the "Add task" button to the right */
 .todo-form-footer {
   display: flex;
   justify-content: flex-end;
   margin-top: 12px;
 }
 
-/* Inline description editor */
-.description-editor {
-  margin-top: 6px;
-  resize: vertical;
-}
+/* ==========================================================================
+   7. UTILITIES
+   ========================================================================== */
 
-.description-save-btn,
-.description-cancel-btn {
-  margin-top: 6px;
-  margin-right: 6px;
-}
-
-.description-cancel-btn {
-  padding: 6px 14px;
-  background-color: #363636;
-  color: inherit;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-.logo {
-  padding: 0 12px;
-  margin-bottom: 16px;
-  font-size: 18px;
-  font-weight: 700;
+/* Toggled by dom.js to show/hide forms and descriptions.
+   Kept LAST so it wins over any rule with the same strength */
+.hidden {
+  display: none;
 }
