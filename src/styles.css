@@ -196,3 +196,14 @@ html {
   flex-basis: 100%;
   padding-left: 1.75rem;
 }
+
+#add-project {
+  width: 100%;
+  margin-top: 4px;
+  color: #ff7066;
+  font-weight: 500;
+}
+
+#add-project::before {
+  content: '+ ';
+}
