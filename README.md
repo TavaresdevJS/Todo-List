@@ -3,6 +3,10 @@
 A task manager built for [The Odin Project](https://www.theodinproject.com/lessons/node-path-javascript-todo-list).
 Layout and colors inspired by [Todoist](https://www.todoist.com).
 
+**Live demo:**
+
+![Screenshot of the app](./src/img/demo.PNG)
+
 ## Features
 
 - Create and delete projects (the Inbox is the default project and can't be deleted)
