@@ -3,7 +3,7 @@
 A task manager built for [The Odin Project](https://www.theodinproject.com/lessons/node-path-javascript-todo-list).
 Layout and colors inspired by [Todoist](https://www.todoist.com).
 
-**Live demo:**
+**Live demo:** https://tavaresdevjs.github.io/Todo-List/
 
 ![Screenshot of the app](./src/img/demo.PNG)
 
