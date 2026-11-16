@@ -151,6 +151,23 @@ html {
   color: #ff7066;
 }
 
+.project-item .project-delete-button {
+  padding: 2px 6px;
+  font-size: 12px;
+  color: #8a8a8a;
+  opacity: 0;
+}
+
+.project-item:hover .project-delete-button,
+.project-item .project-delete-button:focus-visible {
+  opacity: 1;
+}
+
+.project-item .project-delete-button:hover {
+  color: #ff7066;
+  background-color: transparent;
+}
+
 .main {
   background-color: #1f1f1f;
   padding: 32px 48px;

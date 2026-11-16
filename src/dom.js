@@ -193,12 +193,12 @@ export function showProject(project) {
 
 // Highlight whatever is open in the sidebar: a view button or a project row
 function updateSelected() {
-  // 1. Remove the highlight from everything
+  // Remove the highlight from everything
   document
     .querySelectorAll('.nav .selected')
     .forEach(el => el.classList.remove('selected'));
 
-  // 2. Add it to the one thing that is open right now
+  // Add it to the one thing that is open right now
   let selectedEl;
   if (currentView !== 'project') {
     selectedEl = document.querySelector(`[data-view="${currentView}"]`);
