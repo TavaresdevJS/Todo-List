@@ -437,6 +437,24 @@ body {
   border-color: #ff7066;
 }
 
+/* Priority dropdown: a transparent background makes some browsers draw the
+   open list light while the text stays light, so give it solid colours */
+#todo-priority {
+  background-color: #282828;
+  color: #e6e6e6;
+  cursor: pointer;
+}
+
+#todo-priority option {
+  background-color: #282828;
+  color: #e6e6e6;
+}
+
+/* The "Select a priority" placeholder option */
+#todo-priority option[value=''] {
+  color: #8a8a8a;
+}
+
 /* --- Red main-action buttons: Submit project, Add task, Save ---
    .nav .btn is needed to beat .nav button in the sidebar */
 
