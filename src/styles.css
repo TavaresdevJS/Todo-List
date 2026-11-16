@@ -439,3 +439,10 @@ html {
   border-radius: 6px;
   cursor: pointer;
 }
+
+.logo {
+  padding: 0 12px;
+  margin-bottom: 16px;
+  font-size: 18px;
+  font-weight: 700;
+}
