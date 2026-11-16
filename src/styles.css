@@ -281,3 +281,30 @@ html {
   background-color: #363636;
   color: #e6e6e6;
 }
+
+.project-form-header,
+.todo-form-header {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.project-form-label,
+.todo-form-label,
+.todo-priority-label {
+  font-size: 13px;
+  color: #b3b3b3;
+}
+
+.project-form {
+  margin-top: 8px;
+  padding: 8px 12px 12px;
+  border: 1px solid #3d3d3d;
+  border-radius: 8px;
+}
+
+.project-form-body {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 10px;
+}
