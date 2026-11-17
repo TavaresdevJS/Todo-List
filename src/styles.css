@@ -79,7 +79,11 @@ h6 {
 /* ==========================================================================
    1. BASE & PAGE LAYOUT
    ========================================================================== */
-
+:root {
+  --bg-main: #1f1f1f;
+  --bg-sidebar: #282828;
+  --text: #e6e6e6;
+}
 /* Tells the browser the page is dark, so inputs, selects,
    checkboxes and scrollbars get dark versions too */
 html {
@@ -94,12 +98,26 @@ body {
   display: grid;
   min-height: 100vh;
   grid-template-columns: 280px 1fr;
-  color: #e6e6e6;
+  color: var(--text);
 }
 
 /* ==========================================================================
    2. SIDEBAR
    ========================================================================== */
+
+.nav {
+  background-color: var(--bg-sidebar);
+  padding: 16px 12px;
+}
+
+.nav.light {
+  background-color: #f3f1ee;
+}
+
+.main.light {
+  background-color: #fff;
+  border-right: 1px solid #e5e5e5;
+}
 
 .nav-header {
   display: flex;
@@ -112,8 +130,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
+  width: 44px;
+  height: 44px;
   padding: 0;
 }
 
@@ -124,11 +142,6 @@ body {
 
 #theme-toggle:hover img {
   opacity: 1;
-}
-
-.nav {
-  background-color: #282828;
-  padding: 16px 12px;
 }
 
 /* 12px left padding lines the logo up with the buttons below */
@@ -247,7 +260,7 @@ body {
    ========================================================================== */
 
 .main {
-  background-color: #1f1f1f;
+  background-color: var(--bg-main);
   padding: 32px 48px;
 }
 
