@@ -274,7 +274,7 @@ body {
 
 /* Selected view or project (class added by updateSelected() in dom.js).
    Must stay AFTER the hover rules above, so a selected item
-   stays red while you hover it */
+   stays highlighted while you hover it */
 .nav button.selected,
 .project-item.selected {
   background-color: var(--selected-bg);
@@ -447,7 +447,7 @@ body {
   margin-right: 6px;
 }
 
-/* Quieter gray button: only the main action is red */
+/* Quieter gray button: only the main action gets the accent colour */
 .description-cancel-btn {
   padding: 6px 14px;
   background-color: var(--hover);
@@ -461,7 +461,7 @@ body {
    5. "ADD TASK" BUTTON
    ========================================================================== */
 
-/* Muted text with a red "+", turns red on hover */
+/* Muted text with an accent-coloured "+", turns accent on hover */
 #add-task {
   margin-top: 8px;
   padding: 8px 0;
@@ -500,7 +500,7 @@ body {
   border-radius: 6px;
 }
 
-/* The red border replaces the browser's focus outline,
+/* The accent border replaces the browser's focus outline,
    so focus is still visible */
 .form-control:focus,
 #todo-priority:focus,
@@ -528,7 +528,7 @@ body {
   color: var(--muted);
 }
 
-/* --- Red main-action buttons: Submit project, Add task, Save ---
+/* --- Main-action buttons (red in dark, blue in light): Submit project, Add task, Save ---
    .nav .btn is needed to beat .nav button in the sidebar */
 
 .btn,
