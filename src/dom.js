@@ -23,7 +23,6 @@ import { format, parseISO } from 'date-fns';
 
 // Sidebar
 const themeBtn = document.getElementById('theme-toggle');
-const sidebar = document.querySelector('nav');
 const inboxBtn = document.querySelector('[data-view="inbox"]');
 const todayBtn = document.querySelector('[data-view="today"]');
 const weekBtn = document.querySelector('[data-view="week"]');
@@ -38,7 +37,6 @@ const projectNameInput = document.getElementById('name-input');
 const closeFormBtn = document.getElementById('close-project-btn');
 
 // Main area
-const mainArea = document.querySelector('main');
 const viewTitle = document.getElementById('view-title');
 const todoList = document.getElementById('todo-list');
 const addTaskBtn = document.getElementById('add-task');
@@ -62,8 +60,7 @@ let currentView = 'project';
 
 // Theme change btn
 themeBtn.addEventListener('click', () => {
-  sidebar.classList.toggle('light');
-  mainArea.classList.toggle('light');
+  document.documentElement.classList.toggle('light');
 });
 
 // Rebuild the sidebar project list from the data

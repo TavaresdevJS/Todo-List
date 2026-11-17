@@ -83,6 +83,41 @@ h6 {
   --bg-main: #1f1f1f;
   --bg-sidebar: #282828;
   --text: #e6e6e6;
+  --text-secondary: #b3b3b3;
+  --muted: #8a8a8a;
+  --border: #3d3d3d;
+  --divider: #333333;
+  --hover: #363636;
+  --accent: #ff7066;
+  --selected-bg: #4b2a27;
+  --btn: #dc4c3e;
+  --btn-hover: #c3392c;
+  --priority-high: #ff7066;
+  --priority-medium: #ff9a14;
+  --priority-low: #5297ff;
+  --icon-filter: invert(0.9);
+}
+
+:root.light {
+  --bg-main: #ffffff;
+  --bg-sidebar: #f3f1ee;
+  --text: #202020;
+  --text-secondary: #595959;
+  --muted: #767676;
+  --border: #cccccc;
+  --divider: #e5e5e5;
+  --hover: #e8e5e1;
+  --accent: #0b5cad;
+  --selected-bg: #dceafa;
+  --btn: #0b5cad;
+  --btn-hover: #084a8c;
+  /* Colour-blind friendly (Okabe-Ito based), darkened to be readable on white.
+     They differ in brightness too, not only in hue */
+  --priority-high: #b04600;
+  --priority-medium: #8a6400;
+  --priority-low: #0b5cad;
+  --icon-filter: none;
+  color-scheme: light;
 }
 /* Tells the browser the page is dark, so inputs, selects,
    checkboxes and scrollbars get dark versions too */
@@ -110,15 +145,6 @@ body {
   padding: 16px 12px;
 }
 
-.nav.light {
-  background-color: #f3f1ee;
-}
-
-.main.light {
-  background-color: #fff;
-  border-right: 1px solid #e5e5e5;
-}
-
 .nav-header {
   display: flex;
   justify-content: space-between;
@@ -136,7 +162,7 @@ body {
 }
 
 #theme-toggle img {
-  filter: invert(0.9);
+  filter: var(--icon-filter);
   opacity: 0.7;
 }
 
@@ -174,7 +200,7 @@ body {
 }
 
 .nav button:hover {
-  background-color: #363636;
+  background-color: var(--hover);
 }
 
 /* --- "My Projects" section --- */
@@ -187,7 +213,7 @@ body {
 .nav-projects h2 {
   font-size: 14px;
   padding: 0 12px;
-  color: #b3b3b3;
+  color: var(--text-secondary);
 }
 
 /* Remove the browser's default bullets and 40px indent */
@@ -207,7 +233,7 @@ body {
 }
 
 .project-item:hover {
-  background-color: #363636;
+  background-color: var(--hover);
   cursor: pointer;
 }
 
@@ -216,7 +242,7 @@ body {
 .project-item .project-delete-button {
   padding: 2px 6px;
   font-size: 12px;
-  color: #8a8a8a;
+  color: var(--muted);
   opacity: 0;
 }
 
@@ -227,7 +253,7 @@ body {
 }
 
 .project-item .project-delete-button:hover {
-  color: #ff7066;
+  color: var(--accent);
   background-color: transparent;
 }
 
@@ -235,7 +261,7 @@ body {
 #add-project {
   width: 100%;
   margin-top: 4px;
-  color: #ff7066;
+  color: var(--accent);
   font-weight: 500;
 }
 
@@ -251,8 +277,9 @@ body {
    stays red while you hover it */
 .nav button.selected,
 .project-item.selected {
-  background-color: #4b2a27;
-  color: #ff7066;
+  background-color: var(--selected-bg);
+  color: var(--accent);
+  font-weight: 700;
 }
 
 /* ==========================================================================
@@ -292,7 +319,7 @@ body {
   align-items: center;
   gap: 0.75rem;
   padding: 0.5rem 0.75rem;
-  border-bottom: 1px solid #333333;
+  border-bottom: 1px solid var(--divider);
   list-style: none;
 }
 
@@ -305,19 +332,19 @@ body {
   flex-shrink: 0;
   width: 18px;
   height: 18px;
-  border: 2px solid #8a8a8a;
+  border: 2px solid var(--muted);
   border-radius: 50%;
   cursor: pointer;
 }
 
 .todo-check:hover {
-  border-color: #e6e6e6;
+  border-color: var(--text);
 }
 
 /* Filled dot with a ring of background colour around it */
 .todo-check:checked {
-  background-color: #8a8a8a;
-  box-shadow: inset 0 0 0 2px #1f1f1f;
+  background-color: var(--muted);
+  box-shadow: inset 0 0 0 2px var(--bg-main);
 }
 
 /* --- Title --- */
@@ -340,10 +367,12 @@ body {
 
 .priority {
   font-size: 12px;
+  font-weight: 500;
   padding: 2px 8px;
   border-radius: 999px;
-  background-color: #363636;
-  color: #b3b3b3;
+  background-color: var(--hover);
+  color: var(--text-secondary);
+  text-transform: capitalize; /* "high" → "High" */
 }
 
 /* Hide the pill when a task has no priority */
@@ -352,17 +381,22 @@ body {
 }
 
 /* Colour per priority. Must stay AFTER .priority (same strength,
-   so the later rule wins) */
+   so the later rule wins).
+   Every pill gets the same style: its colour as text, plus a faint tint
+   of that colour as background (color-mix: 12% colour, rest transparent) */
 .priority-high {
-  color: #ff7066;
+  color: var(--priority-high);
+  background-color: color-mix(in srgb, var(--priority-high) 12%, transparent);
 }
 
 .priority-medium {
-  color: #ff9a14;
+  color: var(--priority-medium);
+  background-color: color-mix(in srgb, var(--priority-medium) 12%, transparent);
 }
 
 .priority-low {
-  color: #5297ff;
+  color: var(--priority-low);
+  background-color: color-mix(in srgb, var(--priority-low) 12%, transparent);
 }
 
 /* --- Task delete X: invisible until the row is hovered --- */
@@ -370,7 +404,7 @@ body {
 .todo-delete-btn {
   padding: 2px 6px;
   background-color: transparent;
-  color: #8a8a8a;
+  color: var(--muted);
   border: none;
   border-radius: 6px;
   cursor: pointer;
@@ -383,7 +417,7 @@ body {
 }
 
 .todo-delete-btn:hover {
-  color: #ff7066;
+  color: var(--accent);
 }
 
 /* --- Description (shown when clicking a task title) --- */
@@ -396,7 +430,7 @@ body {
 
 .description-text {
   font-size: 13px;
-  color: #b3b3b3;
+  color: var(--text-secondary);
   cursor: pointer;
 }
 
@@ -416,7 +450,7 @@ body {
 /* Quieter gray button: only the main action is red */
 .description-cancel-btn {
   padding: 6px 14px;
-  background-color: #363636;
+  background-color: var(--hover);
   color: inherit;
   border: none;
   border-radius: 6px;
@@ -432,18 +466,18 @@ body {
   margin-top: 8px;
   padding: 8px 0;
   background-color: transparent;
-  color: #8a8a8a;
+  color: var(--muted);
   border: none;
   cursor: pointer;
 }
 
 #add-task::before {
   content: '+ ';
-  color: #ff7066;
+  color: var(--accent);
 }
 
 #add-task:hover {
-  color: #ff7066;
+  color: var(--accent);
 }
 
 /* ==========================================================================
@@ -462,7 +496,7 @@ body {
   padding: 6px 10px;
   background-color: transparent;
   color: inherit;
-  border: 1px solid #3d3d3d;
+  border: 1px solid var(--border);
   border-radius: 6px;
 }
 
@@ -473,25 +507,25 @@ body {
 .todo-description:focus,
 .description-editor:focus {
   outline: none;
-  border-color: #ff7066;
+  border-color: var(--accent);
 }
 
 /* Priority dropdown: a transparent background makes some browsers draw the
    open list light while the text stays light, so give it solid colours */
 #todo-priority {
-  background-color: #282828;
-  color: #e6e6e6;
+  background-color: var(--bg-main);
+  color: var(--text);
   cursor: pointer;
 }
 
 #todo-priority option {
-  background-color: #282828;
-  color: #e6e6e6;
+  background-color: var(--bg-main);
+  color: var(--text);
 }
 
 /* The "Select a priority" placeholder option */
 #todo-priority option[value=''] {
-  color: #8a8a8a;
+  color: var(--muted);
 }
 
 /* --- Red main-action buttons: Submit project, Add task, Save ---
@@ -501,7 +535,7 @@ body {
 .nav .btn,
 .description-save-btn {
   padding: 6px 14px;
-  background-color: #dc4c3e;
+  background-color: var(--btn);
   color: #ffffff;
   border: none;
   border-radius: 6px;
@@ -513,7 +547,7 @@ body {
 .btn:hover,
 .nav .btn:hover,
 .description-save-btn:hover {
-  background-color: #c3392c;
+  background-color: var(--btn-hover);
 }
 
 .large-btn {
@@ -526,7 +560,7 @@ body {
 .close-todo-btn {
   padding: 2px 8px;
   background-color: transparent;
-  color: #8a8a8a;
+  color: var(--muted);
   border: none;
   border-radius: 6px;
   cursor: pointer;
@@ -534,8 +568,8 @@ body {
 
 .nav .close-project-btn:hover,
 .close-todo-btn:hover {
-  background-color: #363636;
-  color: #e6e6e6;
+  background-color: var(--hover);
+  color: var(--text);
 }
 
 /* --- Shared form layout --- */
@@ -551,7 +585,7 @@ body {
 .todo-form-label,
 .todo-priority-label {
   font-size: 13px;
-  color: #b3b3b3;
+  color: var(--text-secondary);
 }
 
 /* --- Project form (sidebar) --- */
@@ -559,7 +593,7 @@ body {
 .project-form {
   margin-top: 8px;
   padding: 8px 12px 12px;
-  border: 1px solid #3d3d3d;
+  border: 1px solid var(--border);
   border-radius: 8px;
 }
 
@@ -576,7 +610,7 @@ body {
 .todo-form {
   margin-top: 8px;
   padding: 12px 16px 16px;
-  border: 1px solid #3d3d3d;
+  border: 1px solid var(--border);
   border-radius: 10px;
 }
 
