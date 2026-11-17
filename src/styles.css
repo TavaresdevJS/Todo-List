@@ -101,6 +101,31 @@ body {
    2. SIDEBAR
    ========================================================================== */
 
+.nav-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+#theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+}
+
+#theme-toggle img {
+  filter: invert(0.9);
+  opacity: 0.7;
+}
+
+#theme-toggle:hover img {
+  opacity: 1;
+}
+
 .nav {
   background-color: #282828;
   padding: 16px 12px;
@@ -109,7 +134,6 @@ body {
 /* 12px left padding lines the logo up with the buttons below */
 .logo {
   padding: 0 12px;
-  margin-bottom: 16px;
   font-size: 18px;
   font-weight: 700;
 }
